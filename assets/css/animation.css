@@ -1,0 +1,121 @@
+/*app页面pop切换动画*/
+.popOut-transition, .popIn-transition {
+  -webkit-animation-duration: 0.3s;
+          animation-duration: 0.3s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+}
+
+.popOut-enter,
+.popOut-leave,
+.popIn-enter,
+.popIn-leave {
+  /*overflow-y: hidden;*/
+}
+.popOut-enter {
+	z-index: -1;
+	-webkit-animation-name: popInLeft;
+          animation-name: popInLeft;
+}
+.popOut-leave {
+	-webkit-animation-name: popOutRight;
+          animation-name: popOutRight;
+}
+
+.popIn-enter {
+	-webkit-animation-name: popInRight;
+          animation-name: popInRight;
+}
+.popIn-leave {
+	-webkit-animation-name: popOutLeft;
+          animation-name: popOutLeft;
+}
+@-webkit-keyframes popInLeft {
+  from {
+    -webkit-transform: translateX(-20%) translateZ(0px);
+            transform: translateX(-20%) translateZ(0px);
+    visibility: visible;
+  }
+  to {
+    -webkit-transform: translateX(0px) translateZ(0px);
+            transform: translateX(0px) translateZ(0px);
+  }
+}
+@keyframes popInLeft {
+  from {
+    -webkit-transform: translateX(-20%) translateZ(0px);
+            transform: translateX(-20%) translateZ(0px);
+    visibility: visible;
+  }
+  to {
+    -webkit-transform: translateX(0px) translateZ(0px);
+            transform: translateX(0px) translateZ(0px);
+  }
+}
+@-webkit-keyframes popOutLeft {
+  from {
+    -webkit-transform: translateX(0px) translateZ(0px);
+            transform: translateX(0px) translateZ(0px);
+  }
+  to {
+    visibility: hidden;
+    -webkit-transform: translateX(-20%) translateZ(0px);
+            transform: translateX(-20%) translateZ(0px);
+  }
+}
+@keyframes popOutLeft {
+  from {
+    -webkit-transform: translateX(0px) translateZ(0px);
+            transform: translateX(0px) translateZ(0px);
+  }
+  to {
+    visibility: hidden;
+    -webkit-transform: translateX(-20%) translateZ(0px);
+            transform: translateX(-20%) translateZ(0px);
+  }
+}
+
+@-webkit-keyframes popInRight {
+  from {
+    -webkit-transform: translateX(100%) translateZ(0px);
+    transform: translateX(100%) translateZ(0px);
+    visibility: visible;
+  }
+  to {
+    -webkit-transform: translateX(0px) translateZ(0px);
+            transform: translateX(0px) translateZ(0px);
+  }
+}
+@keyframes popInRight {
+  from {
+    -webkit-transform: translateX(100%) translateZ(0px);
+    transform: translateX(100%) translateZ(0px);
+    visibility: visible;
+  }
+  to {
+    -webkit-transform: translateX(0px) translateZ(0px);
+    transform: translateX(0px) translateZ(0px);
+  }
+}
+@-webkit-keyframes popOutRight {
+  from {
+    -webkit-transform: translateX(0px) translateZ(0px);
+    transform: translateX(0px) translateZ(0px);
+  }
+  to {
+    visibility: hidden;
+    -webkit-transform: translateX(100%) translateZ(0px);
+    transform: translateX(100%) translateZ(0px);
+  }
+}
+@keyframes popOutRight {
+  from {
+    -webkit-transform: translateX(0px) translateZ(0px);
+    transform: translateX(0px) translateZ(0px);
+  }
+  to {
+    visibility: hidden;
+    -webkit-transform: translateX(100%) translateZ(0px);
+    transform: translateX(100%) translateZ(0px);
+  }
+}

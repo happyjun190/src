@@ -1,0 +1,121 @@
+html,
+body,
+#app,
+.page {
+	width: 100%;
+	height: 100%;
+}
+#app,.page {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+.transform_none {
+	transform:none !important
+}
+
+* {
+	/*font-family: 微软雅黑 !important;*/
+}
+body {
+	/*font-family: 微软雅黑 !important;*/
+	background: #fff;
+	overflow-x: hidden;
+	background: #fff;
+}
+
+.mui-bar {
+	background: #fff !important;
+	/*box-shadow:none !important;
+	border-bottom: 1px solid #ddd*/
+}
+.vux-slider>.vux-swiper>.vux-swiper-item>a>.vux-swiper-desc {
+	margin-bottom: 0 !important;
+}
+.content {
+	margin-top: 44px;
+	background: #eee;
+}
+.xs-container {
+}
+
+.box {
+	height: auto;
+	min-height: 100%;
+}
+.full_screen .xs-container {
+	height: 100%;
+}
+.weui_cell_bd p {
+	margin-bottom: 0;
+	font-size: 17px;
+}
+.mui-input-row label,input, select, textarea {
+    /*font-family: 微软雅黑 !important;*/
+}
+.mui-input-group .mui-input-row {
+	height: 48px !important;
+	padding-top: 4px;
+}
+.weui_cell_bd p {
+	color: #000
+}
+.weui_cell_primary input {
+	border: none;
+	margin: auto;
+	padding: inherit;
+	height: auto;
+}
+.xs-plugin-pullup-container {
+	line-height: 40px
+}
+.no-data {
+	text-align: center;
+	padding: 10px 0px;
+}
+.mui-bar {
+	background: #048402 !important
+}
+.mui-bar .mui-title {
+	color: #fff !important
+}
+.mui-bar a:active {
+	color: #fff !important
+}
+.mui-bar a {
+	color: #fff !important
+}
+.vux-number-selector,
+.vux-number-input {
+	box-sizing: content-box !important;
+}
+
+.touched.modified.invalid {
+	color: #dd524d
+}
+.touched.invalid::-webkit-input-placeholder { /* WebKit browsers */
+color: #dd524d
+}
+.touched.invalid:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+color: #dd524d
+}
+.touched.invalid:-moz-placeholder { /* Mozilla Firefox 19+ */
+color: #dd524d
+}
+.touched.invalid:-ms-input-placeholder { /* Internet Explorer 10+ */
+color: #dd524d
+}
+.checker-item {
+	border: 1px solid #ccc;
+	text-align: center;
+	width: 30%;
+	margin: 2% 1.1%;
+	padding: 10px 0px;
+	background: #fff;
+}
+.checker-item-selected {
+	background: #fff;
+	border: 1px solid #04be02;
+}

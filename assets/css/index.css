@@ -214,7 +214,7 @@ body>section.container-fluid{padding-right: 0px;padding-left: 0px;}
 .category .big_category .vegetables_1 span{font-size: 1.4rem;line-height: 3.3rem;color: #000;padding-left: 3%;}
 /*下拉*/
 .vegetables .greens .up a,.vegetables .greens .dowm a{color: #5b5b5b;background-color: #e9e9e9;}
-.vegetables .greens .up a:nth-child(2),.vegetables .greens .up a:nth-child(4),.vegetables .greens .dowm a:nth-child(3){background-color: #04be02;color: #fff;}
+/*.vegetables .greens .up a:nth-child(2),.vegetables .greens .up a:nth-child(4),.vegetables .greens .dowm a:nth-child(3){background-color: #04be02;color: #fff;}*/
 .vegetables .greens .up a,.vegetables .greens .dowm a,.vegetables .greens .up a:nth-child(3){width: 23%;}
 #accordion{margin-bottom: 0;margin-top: 0;}
 #accordion .panel{border: none;border-radius: 0;background-color: #f9f9f9;}
@@ -243,7 +243,7 @@ body>section.container-fluid{padding-right: 0px;padding-left: 0px;}
 .vegetables .greens1{margin: 0;}
 .big_category1 #accordion .panel-heading{border-bottom: 1px solid #ddd;}
 
-
+.colorChange{background-color: #04be02 !important;color: #fff !important;}
 
 
 

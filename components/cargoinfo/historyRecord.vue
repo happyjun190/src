@@ -17,52 +17,22 @@
   <!-- 历史记录 -->
   <section class="message_2 record">
   <div>
-    <div class="date">
-      <p>07-23</p>
+    <div v-for="item in dataItem">
+      <div v-if="item.tracingSourceGoodsDatas.length > 0 ">
+        <div class="date">
+          <p>{{item.date}}</p>
+        </div>
+        <table>
+          <tr class="message_3" v-for="goods in item.tracingSourceGoodsDatas">
+            <td>{{goods.goods.name}}</td>
+            <td>{{goods.supplier.name}}</td>
+            <td>{{goods.supplier.addr}}</td>
+          </tr>
+        </table>
+        </div>
+      </div>
     </div>
-    <table>
-      <tr class="message_3">
-        <td>四季豆</td>
-        <td>山东祁连大棚蔬菜养殖基地</td>
-        <td>12号</td>
-      </tr>
-      <tr class="message_3">
-        <td>四季豆</td>
-        <td>山东祁连大棚蔬菜养殖基地</td>
-        <td>12号</td>
-      </tr>
-      <tr class="message_3">
-        <td>四季豆</td>
-        <td>山东祁连大棚蔬菜养殖基地</td>
-        <td>12号</td>
-      </tr>
-      <tr class="message_3">
-        <td>四季豆</td>
-        <td>山东祁连大棚蔬菜养殖基地</td>
-        <td>12号</td>
-      </tr>
-      <tr class="message_3">
-        <td>四季豆</td>
-        <td>山东祁连大棚蔬菜养殖基地</td>
-        <td>12号</td>
-      </tr>
-      <tr class="message_3">
-        <td>四季豆</td>
-        <td>山东祁连大棚蔬菜养殖基地</td>
-        <td>12号</td>
-      </tr>
-      <tr class="message_3">
-        <td>四季豆</td>
-        <td>山东祁连大棚蔬菜养殖基地</td>
-        <td>12号</td>
-      </tr>
-      <tr class="message_3">
-        <td>四季豆</td>
-        <td>山东祁连大棚蔬菜养殖基地</td>
-        <td>12号</td>
-      </tr>
-    </table>
-    </div>
+    
     </section>
 </section>
 
@@ -71,23 +41,23 @@
 
   </section>
 </template>
-
 <script>
   import { Scroller,Checklist,Box,XButton} from 'vux'
   import ajax from 'src/ajax/index.js'
   import encryption from 'src/assets/js/encryption.js'
   var dataItem;
   export default {
-		name: "checkPublished",
+		name: "historyRecord",
 		ready(){
       //执行登陆
-      ajax.post("qrcScanedQuery", {
+      ajax.post("historyRecord", {
         pageSize: "3",
         pageNum: "1",
-        qrcode:"111"
+        shopId :"",
+        marketId :"402883b6561760a801561762d3860140"
       }, (status,data) => {
         if(status){
-          if(data.length!=null){
+          if(data!=null){
             this.dataItem = data;
             mui.toast("获取测试数据成功");
           }else{
@@ -130,4 +100,4 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style src="../../assets/css/index.css"></style>
+<style src="../../assets/css/allCss.css"></style>

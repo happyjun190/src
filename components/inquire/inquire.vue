@@ -1,16 +1,17 @@
 <template>
 <!-- 布局容器 -->
+<div v-if="dataItem != null" >
 <section class="container-fluid">
 <!-- 头部 -->
   <section class="header">
     <header class="title1">
       <div class="up">
-        <a href="javascript:history.go(-1);">
+        <a href="JavaScript:void(0)" @click="closeCurrentPage">
           <img src="../../assets/images/left_1.png" alt="">
         </a>
       </div>
       <div class="food_name">
-        <a href="">{{dataItem.market.name}}</a>
+        <a href="JavaScript:void(0)">{{dataItem.market.name}}</a>
       </div>
     </header>
   </section>
@@ -57,7 +58,8 @@
     </article>
   </section>
 </section>
-
+</div>
+<div v-else></div>
 </template>
 
 <script>
@@ -65,56 +67,59 @@
   import ajax from 'src/ajax/index.js'
   import encryption from 'src/assets/js/encryption.js'
 
-  var dataItem;
+  function plusReady() {
+
+  }
+  //扩展API加载完毕后调用onPlusReady回调函数
+  if(window.plus) {
+     plusReady();
+  } else {
+    document.addEventListener( "plusready", plusReady, false );
+  }
+
+  function getUrlParam(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+      var r = window.location.search.substr(1).match(reg); //匹配目标参数
+      if (r != null) return unescape(r[2]); return null; //返回参数值
+  }
+
+  var dataItem = null;
   export default {
 		name: "getTracingSource",
 		ready(){
-      //执行登陆
-      ajax.post("getTracingSource", {
-        pageSize: "3",
-        pageNum: "1",
-        shopId:"402883b6561760a80156176529ff0177",
-        marketId:"402883b6561760a801561762d3860140"
-      }, (status,data) => {
-        if(status){
-          if(data!=null){
-            this.dataItem = data;
-            mui.toast("获取测试数据成功");
-          }else{
-            mui.toast("获取测试数据失败");
+        getUrlParam("shopId");
+        //查询信息
+        ajax.post("getTracingSource", {
+          pageSize: 3,
+          pageNum: 1,
+          shopId:getUrlParam("shopId"),
+          marketId:getUrlParam("marketId")
+        }, (status,data) => {
+          if(status){
+            if(data!=null){
+              //alert(JSON.stringify(data));
+              this.dataItem = data;
+              mui.toast("获取测试数据成功");
+            }else{
+              mui.toast("获取测试数据失败");
+            }
           }
-        }
-        //this.disablevalue=false;
-      },false)
+        },false)
+
 		},
 		components: {
 	    Scroller,Checklist,Box,XButton
 	  },
 		data() {
 			return {
-        dataItem:""
+        dataItem:dataItem
 			}
 		},
 		methods: {
-			//登陆
-			onLogin(){
-					this.disablevalue=true;
-					//执行登陆
-					ajax.post("checkPublished", {
-						pageSize: "3",
-						pageNum: "1",
-						marketName:"bc96731e521811e6987cf8cab858db3f"
-					}, (status,data) => {
-						if(status){
-							if(data.length>0){
-								mui.toast("获取测试数据成功");
-							}else{
-								mui.toast("获取测试数据失败");
-							}
-						}
-						this.disablevalue=false;
-					},false)
-			}
+      closeCurrentPage() {
+          var ws=plus.webview.currentWebview();
+          plus.webview.close(ws);
+      }
 		}
 	}
 </script>

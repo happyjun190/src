@@ -1,4 +1,5 @@
 <template>
+  <input type='button' @click="cancelScan" value='返回' />
   <div id= "bcid"></div>
   <input type='text' id='text' style="display:none"/>
 </template>
@@ -10,12 +11,14 @@
 
   var scan = null;
   //扩展API加载完毕后调用onPlusReady回调函数
-  document.addEventListener( "plusready", onPlusReady, false );
+  function plusReady() {
 
-  // 扩展API加载完毕，现在可以正常调用扩展API
-  function onPlusReady() {
-    var e = document.getElementById("scan");
-    e.removeAttribute( "disabled" );
+  }
+  //扩展API加载完毕后调用onPlusReady回调函数
+  if(window.plus) {
+     plusReady();
+  } else {
+    document.addEventListener( "plusready", plusReady, false );
   }
 
   function onmarked( type, result ) {
@@ -31,22 +34,36 @@
       text = 'EAN8: ';
       break;
     }
-    alert(text+result);
-    ajax.post("checkPublished", {
+    
+    var ws=plus.webview.currentWebview();
+    var words = ws.getURL().split('#!');
+    var baseURL = words[0]+'#!/';
+    //执行登陆
+    ajax.post("qrcScanedQuery", {
       pageSize: "3",
       pageNum: "1",
-      marketName:"bc96731e521811e6987cf8cab858db3f",
-      text:text
+      qrcode:result
     }, (status,data) => {
       if(status){
-        if(data.length>0){
-          mui.toast("获取测试数据成功");
+        if(data!=null){
+          var type = data[0].type;
+          var w;
+          if(type=='order') {
+              baseURL = baseURL+'checkPublishedDb?orderId='+data[0].sell.id;
+              w = plus.webview.create(baseURL);
+          } else {
+              baseURL = baseURL+'inquire?shopId='+data[0].shop.id+'&marketId='+'';
+              //w = plus.webview.create(baseURL,'inquireView',{},{shopId:data[0].shop.id,marketId:""});
+              w = plus.webview.create(baseURL);
+          }          
+          w.show();
+          //mui.toast("获取测试数据成功");
         }else{
-          mui.toast("获取测试数据失败");
+          mui.toast("获取扫码数据失败");
         }
       }
-      this.disablevalue=false;
     },false)
+    
 
   }
 
@@ -58,8 +75,7 @@
           scan = new plus.barcode.Barcode('bcid');
           scan.onmarked = onmarked;
           scan.start()
-        }, 500);
-
+        }, 100);
 		},
 		components: {
 	    Scroller,Checklist,Box,XButton
@@ -70,21 +86,12 @@
 			}
 		},
 		methods: {
-        showUp() {
-          scan = new plus.barcode.Barcode('bcid');
-          scan.onmarked = onmarked;
-          scan.start();
-        },
-        startRecognize() {
-        	scan = new plus.barcode.Barcode('bcid');
-        	scan.onmarked = onmarked;
+        cancelScan() {
+          var ws=plus.webview.currentWebview();
+          plus.webview.close(ws);
         },
         startScan() {
-        	scan.start();
-        },
-        cancelScan() {
-        	scan.cancel();
-          this.$router.go('/homepage');
+          scan.start();
         }
 		}
 	}

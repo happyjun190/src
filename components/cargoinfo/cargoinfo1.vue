@@ -32,14 +32,9 @@
          <article class="vegetables">
            <div class="greens">
              <div class="greens_up">
-               <a href="stock_market.html">生菜</a>
+               <a href="JavaScript:void(0)" @click="goStockMarket">生菜</a>
                <a href="">秋刀鱼</a>
                <a href="">卷芯包菜</a>
-               <a href="">草鱼</a>
-             </div>
-             <div class="greens_dowm">
-               <a href="">鸡蛋</a>
-               <a href="">千张</a>
                <a href="JavaScript:void(0)" @click="goClassification">+</a>
              </div>
            </div>
@@ -75,6 +70,9 @@
 			}
 		},
 		methods: {
+      goStockMarket() {
+        this.$router.go('/stockMarket');
+      },
       goClassification() {
         this.$router.go('/classification');
       },

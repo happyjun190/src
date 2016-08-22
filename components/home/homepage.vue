@@ -113,7 +113,7 @@
         </li>
 
         <li class="col-sm-4 col-xs-4 text-center">
-          <a href="JavaScript:void(9)" @click="needDevelop">
+          <a href="JavaScript:void(9)" @click="goCargoinfo">
             <img src="../../assets/images/photo_4.png" alt="">
             <span>个人</span>
           </a>
@@ -130,11 +130,21 @@
   import ajax from 'src/ajax/index.js'
   import encryption from 'src/assets/js/encryption.js'
 
+  function plusReady() {
+
+  }
+  //扩展API加载完毕后调用onPlusReady回调函数
+  if(window.plus) {
+     plusReady();
+  } else {
+    document.addEventListener( "plusready", plusReady, false );
+  }
+
+
   var dataItem;
   export default {
 		name: "checkPublished",
 		ready(){
-
 		},
 		components: {
 	    Scroller,Checklist,Box,XButton
@@ -150,13 +160,38 @@
 					this.$router.go('/checkPublished');
 			},
       goTracingSource(){
-      		this.$router.go('/inquire');
+          var ws=plus.webview.currentWebview();
+          //console.log( "当前Webview窗口："+ws.getURL() );
+          //alert(ws.getURL());
+          //var currentURL = ws.getURL();
+          var w;
+          if(ws.getURL().indexOf('#!')>0) {
+            w = plus.webview.create(ws.getURL()+'/inquire?shopId='+'402883b6561760a80156176529ff0177'+'marketId='+'');
+          } else {
+            w = plus.webview.create(ws.getURL()+'#!/inquire?shopId='+'402883b6561760a80156176529ff0177'+'marketId='+'');
+          }
+          w.show();
+
       },
       goSaoma() {
-        this.$router.go('/saoma');
+        var ws=plus.webview.currentWebview();
+        //console.log( "当前Webview窗口："+ws.getURL() );
+        //alert(ws.getURL());
+        //var currentURL = ws.getURL();
+        var w;
+        if(ws.getURL().indexOf('#!')>0) {
+          w = plus.webview.create(ws.getURL()+'/saoma');
+        } else {
+          w = plus.webview.create(ws.getURL()+'#!/saoma');
+        }
+        w.show();
+        //this.$router.go('/saoma');
       },
       needDevelop(){
         mui.toast("功能开发中");
+      },
+      goCargoinfo(){
+        this.$router.go('/cargoinfo');
       }
 		}
 	}

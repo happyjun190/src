@@ -59,10 +59,10 @@
       ajax.post("checkPublished", {
         pageSize: "3",
         pageNum: "1",
-        marketName:"402883b6561760a801561762d3860140"
+        marketName:"bc96731e521811e6987cf8cab858db3f"
       }, (status,data) => {
         if(status){
-          if(data.length!=null){
+          if(data!=null){
             this.dataItem = data;
             mui.toast("获取测试数据成功");
           }else{

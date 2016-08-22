@@ -83,6 +83,30 @@ module.exports = function(router) {
 			component: function (resolve) {
 				require(['./components/cargoinfo/classification.vue'], resolve)
 			}
+		},
+		//溯源历史记录查询
+		'/historyRecord': {
+			component: function (resolve) {
+				require(['./components/cargoinfo/historyRecord.vue'], resolve)
+			}
+		},
+		//进货市场列表查询
+		'/stockMarket': {
+			component: function (resolve) {
+				require(['./components/cargoinfo/stockMarket.vue'], resolve)
+			}
+		},
+		//进货市场市场档口查询
+		'/selectStalls': {
+			component: function (resolve) {
+				require(['./components/cargoinfo/selectStalls.vue'], resolve)
+			}
+		},
+		//录入重量
+		'/purchaseVolume': {
+			component: function (resolve) {
+				require(['./components/cargoinfo/purchaseVolume.vue'], resolve)
+			}
 		}
 
 	});

@@ -68,6 +68,4 @@
 	}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style src="../../assets/css/allCss.css"></style>
 <style src="../../assets/css/login.css"></style>

@@ -1,11 +1,12 @@
 <template>
-  <input type='button' @click="cancelScan" value='返回' />
+  <!--<input type='button' @click="closeCurrentPage" value='返回' />-->
+  <x-header :left-options="{showBack: true, preventGoBack:true}" @click="closeCurrentPage" style="background-color:#04be02;">扫码</x-header>
   <div id= "bcid"></div>
   <input type='text' id='text' style="display:none"/>
 </template>
 
 <script>
-  import { Scroller,Checklist,Box,XButton} from 'vux'
+  import {Scroller,Box,XHeader} from 'vux'
   import ajax from 'src/ajax/index.js'
   import encryption from 'src/assets/js/encryption.js'
 
@@ -52,7 +53,7 @@
               baseURL = baseURL+'checkPublishedDb?orderId='+data[0].sell.id;
               w = plus.webview.create(baseURL);
           } else {
-              baseURL = baseURL+'inquire?shopId='+data[0].shop.id+'&marketId='+'';
+              baseURL = baseURL+'tracingSource?shopId='+data[0].shop.id+'&marketId='+'';
               //w = plus.webview.create(baseURL,'inquireView',{},{shopId:data[0].shop.id,marketId:""});
               w = plus.webview.create(baseURL);
           }
@@ -78,7 +79,7 @@
         }, 100);
 		},
 		components: {
-	    Scroller,Checklist,Box,XButton
+	    Scroller,Box,XHeader
 	  },
 		data() {
 			return {
@@ -86,7 +87,7 @@
 			}
 		},
 		methods: {
-        cancelScan() {
+        closeCurrentPage() {
           var ws=plus.webview.currentWebview();
           plus.webview.close(ws);
         },

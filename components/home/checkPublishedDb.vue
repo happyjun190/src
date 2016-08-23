@@ -1,7 +1,7 @@
 <template>
 <!-- 布局容器 -->
-  <section class="container-fluid">
-  <!-- 头部 -->
+  <section>
+    <!-- 头部
     <section class="header">
       <header class="title1">
         <div class="up">
@@ -14,6 +14,10 @@
         </div>
       </header>
     </section>
+    -->
+    <!-- 头部-->
+    <x-header :left-options="{showBack: true, preventGoBack:true}" style="background-color:#04be02;">查询结果</x-header>
+
 
     <scroller lock-x v-ref:scroller class="full_screen">
       <div class="box">
@@ -48,7 +52,7 @@
 </template>
 
 <script>
-  import {Scroller,Box} from 'vux'
+  import {Scroller,Box,XHeader} from 'vux'
   import ajax from 'src/ajax/index.js'
   import encryption from 'src/assets/js/encryption.js'
 
@@ -95,7 +99,7 @@
 
 		},
 		components: {
-	    Scroller,Box
+	    Scroller,Box,XHeader
 	  },
 		data() {
 			return {
@@ -115,12 +119,11 @@
           var ws=plus.webview.currentWebview();
           plus.webview.close(ws);
       }
-		}
+		},
+    events: {
+        onClickBack: function() {
+            alert("back");
+        }
+    }
 	}
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<!--<style src="../../assets/css/normalize.css"></style>-->-->
-<!--<style src="../../assets/css/index.css"></style>-->
-<!--<style src="../../assets/css/reset.css"></style>-->
-<style src="../../assets/css/allCss.css"></style>

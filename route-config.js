@@ -33,19 +33,19 @@ module.exports = function(router) {
 		//抽检结果列表
 		'/checkPublished': {
 			component: function (resolve) {
-				require(['./components/foodcheck/checkPublished.vue'], resolve)
+				require(['./components/home/checkPublished.vue'], resolve)
 			}
 		},
 		//抽检结果详情
 		'/checkPublishedDb': {
 			component: function (resolve) {
-				require(['./components/foodcheck/checkPublishedDb.vue'], resolve)
+				require(['./components/home/checkPublishedDb.vue'], resolve)
 			}
 		},
 		//溯源信息查询
-		'/inquire': {
+		'/tracingSource': {
 			component: function (resolve) {
-				require(['./components/inquire/inquire.vue'], resolve)
+				require(['./components/home/tracingSource.vue'], resolve)
 			}
 		},
 		//溯源信息查询

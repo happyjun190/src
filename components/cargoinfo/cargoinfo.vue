@@ -1,7 +1,8 @@
 <template>
 <!-- 布局容器 -->
-<section class="container-fluid">
-<section class="header">
+<!--<section>
+  <section class="header">
+
   <header class="title">
     <div class="up">
       <a href="javascript:history.go(-1);">
@@ -9,40 +10,46 @@
       </a>
     </div>
     <div class="food_name">
-      <a href="">入货信息</a>
+      <a href="JavaScript:void(0)">入货信息</a>
     </div>
-    <div class="history">
-      <a href="JavaScript:void(0)" @click="getHistoryRecordPage">历史记录</a>
+    <div class="history">-->
+      <!--<a href="JavaScript:void(0)" @click="getHistoryRecordPage">历史记录</a>-->
+      <!--<a href="JavaScript:void(0)" v-link="{path: '/historyRecord'}">历史记录</a>
     </div>
   </header>
 </section>
+-->
+<x-header :left-options="{showBack: true, preventGoBack:true}" right-options="{showMore: true}" @click="closeCurrentPage"
+          style="background-color:#fff;"><span style="color:#000;">入货信息</span><span slot="right" @click="getHistoryRecordPage">历史记录</span>
+</x-header>
+
+
+
 <div v-if="type==0">
-    
-  <!-- 头部 -->
-  <div>
-    <!-- 入货信息 -->
-    <section class="message">
-      <table>
-        <tr>
-          <td>菜名</td>
-          <td>进货渠道</td>
-          <td>档口</td>
-        </tr>
-      </table>
-      <article class="install">
-        <div class="paragraph">
-          <p>亲爱的用户您好，初次登录，</p>
-          <p>请设置您档口的常进蔬菜，<a href="JavaScript:void(0)" @click="goClassification">立即设置</a>!</p>
-        </div>
-      </article>
-    </section>
-  </div>
-
-
-  </div>
-  <div v-else>
-    
-    <div>
+  <scroller lock-x v-ref:scroller class="full_screen">
+    <div class="box">
+      <!-- 入货信息 -->
+      <section class="message">
+        <table>
+          <tr>
+            <td>菜名</td>
+            <td>进货渠道</td>
+            <td>档口</td>
+          </tr>
+        </table>
+        <article class="install">
+          <div class="paragraph">
+            <p>亲爱的用户您好，初次登录，</p>
+            <p>请设置您档口的常进蔬菜，<a href="JavaScript:void(0)" v-link="{path: '/classification'}">立即设置</a>!</p>
+          </div>
+        </article>
+      </section>
+    </div>
+  </scroller>
+</div>
+<div v-else>
+  <scroller lock-x v-ref:scroller class="full_screen">
+    <div class="box">
       <!-- 入货信息2 -->
       <section class="message_1 message_2">
         <table>
@@ -65,35 +72,35 @@
             <div class="greens_up">
               <div v-if="dataItem.tracingSourcesNoSupplier.length>0">
                 <a href="JavaScript:void(0)" @click="goStockMarket" v-for="tracingSource in dataItem.tracingSourcesNoSupplier" goodsId="{{tracingSource.goods.id}}">{{tracingSource.goods.name}}</a>
-                <a href="JavaScript:void(0)" @click="goClassification">+</a>
+                <a href="JavaScript:void(0)" v-link="{path: '/classification'}">+</a>
               </div>
-              <div v-else><a href="JavaScript:void(0)" @click="goClassification">+</a></div>
+              <div v-else><a href="JavaScript:void(0)" v-link="{path: '/classification'}">+</a></div>
             </div>
           </div>
         </article>
       </section>
-        <!-- 提交 -->
-      <section class="submit">
-        <article class="button">
-          <div class="but">
-            <input type="submit" @click="submitTracingSources">
-          </div>
-        </article>
-      </section>
-    
     </div>
-  </div>
+  </scroller>
+      <!-- 提交 -->
+  <section class="submit">
+    <article class="button">
+      <div class="but">
+        <input type="submit" @click="submitTracingSources">
+      </div>
+    </article>
+  </section>
+</div>
 </section>
 
 </template>
 
 
 <script>
-  import { Scroller,Checklist,Box,XButton} from 'vux'
+  import {Scroller,Box,XHeader} from 'vux'
   import ajax from 'src/ajax/index.js'
   import encryption from 'src/assets/js/encryption.js'
 
-  var type = 0;
+  var type = 1;
   var dataItem;
   export default {
 		name: "cargoinfo",
@@ -121,7 +128,7 @@
         },false)
 		},
 		components: {
-	    Scroller,Checklist,Box,XButton
+	    Scroller,Box,XHeader
 	  },
 		data() {
 			return {
@@ -137,8 +144,8 @@
         this.$router.go('/historyRecord');
       },
       goStockMarket(event) {
-        var goodsId = $(event.target).attr('goodsId');
-        //this.$router.go('/stockMarket?goodsId='+goodsId);
+        //alert(event.target.goodsId);
+        var goodsId = event.target.attributes["goodsid"].value;
         this.$router.go({
           path:'/stockMarket',
           params:{goodsId:goodsId},
@@ -160,7 +167,3 @@
 		}
 	}
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style src="../../assets/css/allCss.css"></style>
-

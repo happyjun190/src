@@ -1,5 +1,0 @@
-import './jquery-1.9.1.js'
-import './zepto.js'
-import './qrcode.lib.min.js'
-import './qrcode.js'
-import './grid.js'

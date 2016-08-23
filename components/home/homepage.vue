@@ -1,7 +1,7 @@
 <template>
-<!-- 布局容器 -->
+      <!-- 布局容器 -->
       <section>
-      <!-- 头部 -->
+      <!-- 头部
         <section class="header">
           <header class="title1">
             <div class="food_name">
@@ -9,6 +9,8 @@
             </div>
           </header>
         </section>
+      -->
+      <x-header :left-options="{showBack: false}" style="background-color:#04be02;">食安菜妈</x-header>
         <scroller lock-x v-ref:scroller class="full_screen">
           <div class="box">
             <!-- 轮播图 -->
@@ -99,12 +101,13 @@
         <div class="wrie"></div>
       </div>
     </scroller>
-    <!-- 脚部 -->
+
+    <!-- 脚部-->
     <section class="footer">
       <footer class="list_1">
         <ul class="row">
         <li class="col-sm-4 col-xs-4 text-center">
-          <a href="javascript:;">
+          <a href="JavaScript:void(0)">
             <img src="../../assets/images/photo_2.png" alt="">
             <span>首页</span>
           </a>
@@ -125,13 +128,14 @@
       </ul>
       </footer>
     </section>
+
   </section>
 
 
 </template>
 
 <script>
-  import {Scroller,Box} from 'vux'
+  import {Scroller,Box,XHeader} from 'vux'
   import ajax from 'src/ajax/index.js'
   import encryption from 'src/assets/js/encryption.js'
 
@@ -148,11 +152,11 @@
 
   var dataItem;
   export default {
-		name: "checkPublished",
+		name: "homepage",
 		ready(){
 		},
 		components: {
-	    Scroller,Box
+	    Scroller,Box,XHeader
 	  },
 		data() {
 			return {
@@ -160,7 +164,7 @@
 			}
 		},
 		methods: {
-			//登陆
+			//
 			goCheckPublished(){
 					this.$router.go('/checkPublished');
 			},
@@ -171,9 +175,9 @@
           //var currentURL = ws.getURL();
           var w;
           if(ws.getURL().indexOf('#!')>0) {
-            w = plus.webview.create(ws.getURL()+'/inquire?shopId='+'402883b6561760a80156176529ff0177'+'marketId='+'');
+            w = plus.webview.create(ws.getURL()+'/tracingSource?shopId='+'402883b6561760a80156176529ff0177'+'marketId='+'');
           } else {
-            w = plus.webview.create(ws.getURL()+'#!/inquire?shopId='+'402883b6561760a80156176529ff0177'+'marketId='+'');
+            w = plus.webview.create(ws.getURL()+'#!/tracingSource?shopId='+'402883b6561760a80156176529ff0177'+'marketId='+'');
           }
           w.show();
 
@@ -191,7 +195,6 @@
             w = plus.webview.create(ws.getURL()+'/saoma');
           }
         } else {
-          alert(222);
           w = plus.webview.create(ws.getURL()+'#!/saoma');
         }
         w.show();
@@ -206,6 +209,3 @@
 		}
 	}
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style src="../../assets/css/allCss.css"></style>

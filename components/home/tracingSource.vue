@@ -91,7 +91,7 @@
 
   var dataItem = null;
   export default {
-		name: "getTracingSource",
+		name: "tracingSource",
 		ready(){
         getUrlParam("shopId");
         //查询信息

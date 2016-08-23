@@ -1,7 +1,7 @@
 <template>
     <!-- 布局容器 -->
-    <section class="container-fluid">
-    <!-- 头部 -->
+    <section>
+    <!-- 头部
       <section class="header">
         <header class="title">
           <div class="up">
@@ -17,59 +17,64 @@
           </div>
         </header>
       </section>
-      <!-- 分类 -->
-      <section class="category">
-      <!-- 蔬菜 -->
-        <article class="big_category">
+      -->
+      <x-header :left-options="{showBack: true, preventGoBack:false}" right-options="{showMore: true}"
+                style="background-color:#fff;"><span style="color:#000;">分类信息</span><span slot="right" @click="onComplete" style="color:#04be02;">完成</span>
+      </x-header>
 
-          <img class="arrow_down" src="../../assets/images/down.png" style="display:none;" alt=""  />
-          <img class="arrow_up" src="../../assets/images/up.png" style="display:none;" alt="" />
+      <scroller lock-x v-ref:scroller class="full_screen">
+        <div class="box">
+          <!-- 分类 -->
+          <section class="category">
+          <!-- 蔬菜 -->
+            <article class="big_category">
 
-            <div class="vegetables_1">
-              <span>蔬菜</span>
-            </div>
-            <!-- 下拉 -->
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-              <div class="panel panel-default"  v-for="(index, item) in dataItem">
-                <div class="panel-heading" role="tab" id="headingOne">
-                  <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                     <span>{{item.goodsClassify.name}}</span>
-                     <div class="img">
-                        <img class="arrow arrow_{{index+1}}" src="../../assets/images/up.png" down="../../assets/images/down.png" alt="" show="{{index+1}}" @click="fnImg" />
-                     </div>
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                  <div class="panel-body">
-                    <!-- 蔬菜名 -->
-                    <div class="vegetables">
-                      <div class="greens">
-                        <div class="greens_up up">
-                          <span v-for="goods in item.goods">
-                            <a href="JavaScript:void(0)" @click="selectGoods" goodsId="{{goods.goods.id}}" class="goodsclass" v-if="goods.selected==0">{{goods.goods.name}}</a>
-                            <a href="JavaScript:void(0)" @click="selectGoods" goodsId="{{goods.goods.id}}" class="goodsclass colorChange" v-else>{{goods.goods.name}}</a>
-                          </span>
+              <img class="arrow_down" src="../../assets/images/down.png" style="display:none;" alt=""  />
+              <img class="arrow_up" src="../../assets/images/up.png" style="display:none;" alt="" />
+
+              <div class="vegetables_1">
+                <span>蔬菜</span>
+              </div>
+              <!-- 下拉 -->
+              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default"  v-for="(index, item) in dataItem">
+                  <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                      <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                       <span>{{item.goodsClassify.name}}</span>
+                       <div class="img">
+                          <img class="arrow arrow_{{index+1}}" src="../../assets/images/up.png" down="../../assets/images/down.png" alt="" show="{{index+1}}" @click="fnImg" />
+                       </div>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                      <!-- 蔬菜名 -->
+                      <div class="vegetables">
+                        <div class="greens">
+                          <div class="greens_up up">
+                            <span v-for="goods in item.goods">
+                              <a href="JavaScript:void(0)" @click="selectGoods" goodsId="{{goods.goods.id}}" class="goodsclass" v-if="goods.selected==0">{{goods.goods.name}}</a>
+                              <a href="JavaScript:void(0)" @click="selectGoods" goodsId="{{goods.goods.id}}" class="goodsclass colorChange" v-else>{{goods.goods.name}}</a>
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-
-
-
-        </article>
-
-      </section>
+            </article>
+          </section>
+        </div>
+      </scroller>
     </section>
 </template>
 
 
 <script>
-  import { Scroller,Checklist,Box,XButton} from 'vux'
+  import {Scroller,Box,XHeader} from 'vux'
   import ajax from 'src/ajax/index.js'
   import encryption from 'src/assets/js/encryption.js'
 
@@ -96,7 +101,7 @@
       },false)
 		},
 		components: {
-	    Scroller,Checklist,Box,XButton
+	    Scroller,Box,XHeader
 	  },
 		data() {
 			return {
@@ -130,7 +135,7 @@
         var goodsIdArray=new Array();
         var index = 0;
         $(".goodsclass").each(function(){
-          
+
           var goodsId = $(this).attr('goodsId');
           var goodsClass = $(this).attr('class');
           //alert(goodsClass);
@@ -163,7 +168,7 @@
             //this.disablevalue=false;
           },false)
         }
-        
+
       },
       selectGoods(evt) {
         var goodsclass = $(evt.target).attr('class');
@@ -177,10 +182,4 @@
 		}
 	}
 
-
-
-
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style src="../../assets/css/allCss.css"></style>

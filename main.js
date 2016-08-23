@@ -1,6 +1,7 @@
 'use strict'
 require('./assets/css/animation.css');
 require('./assets/css/style.css');
+require('./assets/css/allCss.css');
 require('weui');
 require('vux/dist/vux.css');
 import VueValidator from 'vue-validator'

@@ -49,12 +49,12 @@
       var r = window.location.search.substr(1).match(reg); //匹配目标参数
       if (r != null) return unescape(r[2]); return null; //返回参数值
   }
-  
+
   var dataItem;
   export default {
 		name: "selectStalls",
 		ready(){
-      
+
 		},
 		components: {
 	    Scroller,Checklist,Box,XButton
@@ -71,6 +71,3 @@
 		}
 	}
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style src="../../assets/css/allCss.css"></style>

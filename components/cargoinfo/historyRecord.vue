@@ -1,7 +1,7 @@
 <template>
 <!-- 布局容器 -->
-<section class="container-fluid">
-<!-- 头部 -->
+<section>
+<!-- 头部
   <section class="header">
     <header class="title">
       <div class="up">
@@ -14,26 +14,33 @@
       </div>
     </header>
   </section>
+-->
+  <x-header :left-options="{showBack: true}" style="background-color:#fff;"><span style="color:#000;">历史记录</span></x-header>
+
   <!-- 历史记录 -->
-  <section class="message_2 record">
-  <div>
-    <div v-for="item in dataItem">
-      <div v-if="item.tracingSourceGoodsDatas.length > 0 ">
-        <div class="date">
-          <p>{{item.date}}</p>
+  <scroller lock-x v-ref:scroller class="full_screen">
+    <div class="box">
+      <section class="message_2 record">
+      <div>
+        <div v-for="item in dataItem">
+          <div v-if="item.tracingSourceGoodsDatas.length > 0 ">
+            <div class="date">
+              <p>{{item.date}}</p>
+            </div>
+            <table>
+              <tr class="message_3" v-for="goods in item.tracingSourceGoodsDatas">
+                <td>{{goods.goods.name}}</td>
+                <td>{{goods.supplier.name}}</td>
+                <td>{{goods.supplier.addr}}</td>
+              </tr>
+            </table>
+            </div>
+          </div>
         </div>
-        <table>
-          <tr class="message_3" v-for="goods in item.tracingSourceGoodsDatas">
-            <td>{{goods.goods.name}}</td>
-            <td>{{goods.supplier.name}}</td>
-            <td>{{goods.supplier.addr}}</td>
-          </tr>
-        </table>
-        </div>
+
+        </section>
       </div>
-    </div>
-    
-    </section>
+    </scroller>
 </section>
 
 </div>
@@ -42,7 +49,7 @@
   </section>
 </template>
 <script>
-  import { Scroller,Checklist,Box,XButton} from 'vux'
+  import {Scroller,Box,XHeader} from 'vux'
   import ajax from 'src/ajax/index.js'
   import encryption from 'src/assets/js/encryption.js'
   var dataItem;
@@ -68,7 +75,7 @@
       },false)
 		},
 		components: {
-	    Scroller,Checklist,Box,XButton
+	    Scroller,Box,XHeader
 	  },
 		data() {
 			return {
@@ -98,6 +105,3 @@
 		}
 	}
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style src="../../assets/css/allCss.css"></style>

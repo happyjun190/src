@@ -1,7 +1,5 @@
 <template>
-  <!-- 布局容器 -->
-  <section class="container-fluid">
-  <!-- 头部 -->
+    <!-- 头部
     <section class="header">
       <header class="title volume">
         <div class="up">
@@ -17,30 +15,28 @@
         </div>
       </header>
     </section>
-    <!-- 选择档口 -->
-    <section class="select">
-      <div class="common">
-        <span>常用档口：</span>
-        <span>12号</span>
+    -->
+    <x-header :left-options="{showBack: true}" style="background-color:#fff;"><span style="color:#000;">请选择档口</span></x-header>
+    <scroller lock-x v-ref:scroller class="full_screen">
+      <div class="box">
+
+        <!-- 选择档口 -->
+        <section class="select">
+          <div class="common">
+            <span>常用档口：</span>
+            <span>12号</span>
+          </div>
+          <ul>
+            <a href="JavaScript:void(0)" @click="goPurchaseVolume"><li>1号</li></a>
+            <li>2号</li>
+          </ul>
+        </section>
       </div>
-      <ul>
-        <a href="JavaScript:void(0)" @click="goPurchaseVolume"><li>1号</li></a>
-        <li>2号</li>
-        <li>3号</li>
-        <li>4号</li>
-        <li>5号</li>
-        <li>6号</li>
-        <li>7号</li>
-        <li>8号</li>
-        <li>9号</li>
-        <li>10号</li>
-      </ul>
-    </section>
-  </section>
+    </scroller>
 </template>
 
 <script>
-  import { Scroller,Checklist,Box,XButton} from 'vux'
+  import { Scroller,XHeader,Box} from 'vux'
   import ajax from 'src/ajax/index.js'
   import encryption from 'src/assets/js/encryption.js'
 
@@ -57,7 +53,7 @@
 
 		},
 		components: {
-	    Scroller,Checklist,Box,XButton
+	    Scroller,XHeader,Box
 	  },
 		data() {
 			return {

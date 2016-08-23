@@ -145,7 +145,7 @@
       },
       goStockMarket(event) {
         //alert(event.target.goodsId);
-        var goodsId = event.target.attributes["goodsid"].value;
+        var goodsId = event.target.attributes["goodsId"].value;
         this.$router.go({
           path:'/stockMarket',
           params:{goodsId:goodsId},

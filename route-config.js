@@ -55,24 +55,6 @@ module.exports = function(router) {
 			}
 		},
 		//溯源信息查询
-		'/cargoinfo1': {
-			component: function (resolve) {
-				require(['./components/cargoinfo/cargoinfo1.vue'], resolve)
-			}
-		},
-		//溯源信息查询
-		'/cargoinfo2': {
-			component: function (resolve) {
-				require(['./components/cargoinfo/cargoinfo2.vue'], resolve)
-			}
-		},
-		//溯源信息查询
-		'/cargoinfo3': {
-			component: function (resolve) {
-				require(['./components/cargoinfo/cargoinfo3.vue'], resolve)
-			}
-		},
-		//溯源信息查询
 		'/cargoinfo4': {
 			component: function (resolve) {
 				require(['./components/cargoinfo/cargoinfo4.vue'], resolve)

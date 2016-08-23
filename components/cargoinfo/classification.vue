@@ -132,7 +132,7 @@
       },
 
       onComplete() {
-        var goodsIdArray=new Array();
+        /*var goodsIdArray=new Array();
         var index = 0;
         $(".goodsclass").each(function(){
 
@@ -145,7 +145,20 @@
             goodsIdArray[index++] = goodsId;
           }
 
-        });
+        });*/
+        var goodsIdArray=new Array();
+        var index = 0;
+        var i;
+        var goodsClassObjs =  document.getElementsByClassName('goodsclass');
+        for (i = 0; i < goodsClassObjs.length; i++) {
+          var goodsId = goodsClassObjs[i].attributes["goodsId"].value;
+          var goodsClass = goodsClassObjs[i].attributes['class'].value;
+          if(goodsClass=="goodsclass") {
+            //DO NOTHING
+          } else {
+            goodsIdArray[index++] = goodsId;
+          }
+        }
 
         if(goodsIdArray.length==0) {
           this.$router.go('/cargoinfo');
@@ -170,12 +183,14 @@
         }
 
       },
-      selectGoods(evt) {
-        var goodsclass = $(evt.target).attr('class');
+      selectGoods(event) {
+        var goodsclass = event.target.attributes["class"].value;
         if(goodsclass=="goodsclass") {
-          $(evt.target).addClass("colorChange");
+          event.target.setAttribute('class','goodsclass colorChange');
+          //$(evt.target).addClass("colorChange");
         } else {
-          $(evt.target).removeClass("colorChange");
+          event.target.setAttribute('class','goodsclass');
+          //$(evt.target).removeClass("colorChange");
         }
       }
 

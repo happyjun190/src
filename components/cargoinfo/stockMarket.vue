@@ -1,7 +1,6 @@
 <template>
   <!-- 布局容器 -->
-    <section class="container-fluid">
-    <!-- 头部 -->
+    <!-- 头部
       <section class="header">
         <header class="title volume">
           <div class="up">
@@ -17,21 +16,29 @@
           </div>
         </header>
       </section>
-      <!-- 选择市场 -->
-      <section class="select">
-        <div class="common">
-          <span>常用市场：</span>
-          <span>山东祁连大棚蔬菜养殖基地5</span>
+-->
+
+      <x-header :left-options="{showBack: true}" style="background-color:#fff;"><span style="color:#000;">请选择进货市场</span></x-header>
+
+      <scroller lock-x v-ref:scroller class="full_screen">
+        <div class="box">
+
+          <!-- 选择市场 -->
+          <section class="select">
+            <div class="common">
+              <span>常用市场：</span>
+              <span>山东祁连大棚蔬菜养殖基地5</span>
+            </div>
+            <ul class="num">
+              <a href="JavaScript:void(0)" @click="goSelectStalls" v-for="item in dataItem"><li supplierId="{{item.id}}">{{item.name}}</li></a>
+            </ul>
+          </section>
         </div>
-        <ul class="num">
-          <a href="JavaScript:void(0)" @click="goSelectStalls" v-for="item in dataItem"><li supplierId="{{item.id}}">{{item.name}}</li></a>
-        </ul>
-      </section>
-    </section>
+      </scroller>
 </template>
 
 <script>
-  import { Scroller,Checklist,Box,XButton} from 'vux'
+  import { Scroller,Box,XHeader} from 'vux'
   import ajax from 'src/ajax/index.js'
   import encryption from 'src/assets/js/encryption.js'
 
@@ -65,7 +72,7 @@
 
 		},
 		components: {
-	    Scroller,Checklist,Box,XButton
+	    Scroller,Box,XHeader
 	  },
 		data() {
 			return {
@@ -76,7 +83,10 @@
       goSelectStalls(event) {
         //var goodsId = getUrlParam('goodsId');
         var goodsId = this.$route.query.goodsId;
-        var supplierId = $(event.target).attr("supplierId");
+
+        //var supplierId = $(event.target).attr("supplierId");
+        var supplierId = event.target.attributes["supplierId"].value;
+
         //var goodsId = $(event.target).attr('goodsId');
         //alert(supplierId+":"+goodsId);
         //this.$router.go('/selectStalls?supplierId='+supplierId+'&goodsIds='+goodsId);

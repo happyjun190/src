@@ -1,22 +1,29 @@
 <template>
-    <!-- 布局容器 -->
-    <section class="container-fluid">
-    <!-- 头部 -->
-      <section class="header">
-        <header class="title volume">
-          <div class="up">
-            <a href="javascript:history.go(-1);">
-            <img src="../../assets/images/left_1.png" alt="">
-      </a>
-          </div>
-          <div class="food_name">
-            <a href="">请输入进货重量</a>
-          </div>
-          <div class="history complete">
-            <a href="JavaScript:void(0)" @click="onComplete">完成</a>
-          </div>
-        </header>
-      </section>
+  <!-- 布局容器 -->
+  <!-- 头部
+  <section class="header">
+    <header class="title volume">
+      <div class="up">
+        <a href="javascript:history.go(-1);">
+        <img src="../../assets/images/left_1.png" alt="">
+  </a>
+      </div>
+      <div class="food_name">
+        <a href="">请输入进货重量</a>
+      </div>
+      <div class="history complete">
+        <a href="JavaScript:void(0)" @click="onComplete">完成</a>
+      </div>
+    </header>
+  </section>
+  -->
+  <x-header :left-options="{showBack: true, preventGoBack:false}" right-options="{showMore: true}"
+            style="background-color:#fff;"><span style="color:#000;">分类信息</span><span slot="right" @click="onComplete" style="color:#04be02;">完成</span>
+  </x-header>
+
+
+  <scroller lock-x v-ref:scroller class="full_screen">
+    <div class="box">
       <!-- 输入进货量 -->
       <section class="amount">
         <form action="" >
@@ -28,11 +35,12 @@
           </div>
         </form>
       </section>
-    </section>
+    </div>
+  </scroller>
 </template>
 
 <script>
-  import { Scroller,Checklist,Box,XButton} from 'vux'
+  import { Scroller,Box,XHeader} from 'vux'
   import ajax from 'src/ajax/index.js'
   import encryption from 'src/assets/js/encryption.js'
 
@@ -49,7 +57,7 @@
 
 		},
 		components: {
-	    Scroller,Checklist,Box,XButton
+	    Scroller,Box,XHeader
 	  },
 		data() {
 			return {

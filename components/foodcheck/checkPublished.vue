@@ -1,6 +1,6 @@
 <template>
   <!-- 布局容器 -->
-  <section class="container-fluid">
+  <section>
     <!-- 头部 -->
       <section class="header">
           <header class="title1">
@@ -15,33 +15,36 @@
           </header>
       </section>
 
-      <!-- 检测公布 -->
-      <section class="detect" v-for="item in dataItem">
-      <!-- 循环输出检测结果-->
 
-      <article class="announce">
-      <div class="date">
-        <span>{{item.checkDate}}</span>
+      <scroller lock-x v-ref:scroller class="full_screen">
+        <div class="box">
+          <!-- 检测公布 -->
+          <section class="detect" v-for="item in dataItem">
+          <!-- 循环输出检测结果-->
+
+          <article class="announce">
+            <div class="date">
+              <span>{{item.checkDate}}</span>
+            </div>
+
+            <div v-for="detectionData in item.detectionDatas">
+              <div class="stalls">
+                <span>{{detectionData.shopName}}</span>
+              </div>
+              <div class="ratio">
+                <table>
+                  <tr>
+                    <td>{{detectionData.detectionName}}：</td>
+                    <td>{{detectionData.detectionValue}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </section>
+        </article>
+
       </div>
-
-
-      <div v-for="detectionData in item.detectionDatas">
-        <div class="stalls">
-          <span>{{detectionData.shopName}}</span>
-        </div>
-        <div class="ratio">
-          <table>
-            <tr>
-              <td>{{detectionData.detectionName}}：</td>
-              <td>{{detectionData.detectionValue}}</td>
-            </tr>
-          </table>
-        </div>
-      </div>
-
-
-      </section>
-    </article>
+    </scroller>
   </section>
 
 </template>

@@ -3,9 +3,6 @@ require('./assets/css/animation.css');
 require('./assets/css/style.css');
 require('weui');
 require('vux/dist/vux.css');
-import './assets/js/jquery-1.9.1.js'
-import './assets/js/jquery.min.js'
-import '../node_modules/bootstrap/dist/js/bootstrap.js'
 import VueValidator from 'vue-validator'
 import Vue from 'vue'
 import VueRouter from 'vue-router'

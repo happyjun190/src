@@ -4,48 +4,51 @@
   <!-- 头部 -->
     <section class="header">
       <header class="title1">
-    <div class="up">
-      <a href="JavaScript:void(0)" @click="closeCurrentPage">
-          <img src="../../assets/images/left_1.png" alt="">
-    </a>
-    </div>
-    <div class="food_name">
-      <a href="">查询结果</a>
-    </div>
+        <div class="up">
+          <a href="JavaScript:void(0)" @click="closeCurrentPage">
+              <img src="../../assets/images/left_1.png" alt="">
+        </a>
+        </div>
+        <div class="food_name">
+          <a href="">查询结果</a>
+        </div>
       </header>
     </section>
-    <div class="zh_main">
-    <div class="zh_list">订单编号：<span class="zh_list_content">{{dataItem[0].sell.code}}</span></div>
-    <div class="zh_list">交易时间：<span class="zh_list_content">{{dataItem[0].createDate}}</span></div>
-    <div class="zh_list">所在市场：<span class="zh_list_content">{{dataItem[0].sell.shop.name}}</span></div>
-    <div class="zh_list">交易档口：<span class="zh_list_content">{{dataItem[0].sell.shop.market.name}}</span></div>
-    <div class="zh_list">会员卡号：<span class="zh_list_content">{{dataItem[0].sell.card.codeCardFace}}</span></div>
-    <div class="zh_list">支付方式：<span class="zh_list_content">{{dataItem[0].sell.paymode}}</span></div>
-    <div class="zh_list">交易金额：<span class="zh_list_content">{{dataItem[0].sell.money}}</span></div>
-    <hr class="zh_hr"/>
 
-    <div class="zh_box">
-      <span class="zh_tr">菜名</span>
-      <span class="zh_tr">单价/kg</span>
-      <span class="zh_tr">重量kg</span>
-      <span class="zh_td">溯源信息</span>
-    </div>
-    <div class="zh_box" v-for="item in dataItem">
-      <span class="zh_tr">{{item.goods.name}}</span>
-      <span class="zh_tr">{{item.price}}</span>
-      <span class="zh_tr">{{item.weight}}</span>
-      <span class="zh_td">{{item.goods.supplier}}</span>
-    </div>
-    <a href="javascript:void(0)" @click="getAllShopInquireInfo"><div class="zh_list zh_footer">查看档口所有溯源信息</div></a>
+    <scroller lock-x v-ref:scroller class="full_screen">
+      <div class="box">
+        <div class="zh_main">
+          <div class="zh_list">订单编号：<span class="zh_list_content">{{dataItem[0].sell.code}}</span></div>
+          <div class="zh_list">交易时间：<span class="zh_list_content">{{dataItem[0].createDate}}</span></div>
+          <div class="zh_list">所在市场：<span class="zh_list_content">{{dataItem[0].sell.shop.name}}</span></div>
+          <div class="zh_list">交易档口：<span class="zh_list_content">{{dataItem[0].sell.shop.market.name}}</span></div>
+          <div class="zh_list">会员卡号：<span class="zh_list_content">{{dataItem[0].sell.card.codeCardFace}}</span></div>
+          <div class="zh_list">支付方式：<span class="zh_list_content">{{dataItem[0].sell.paymode}}</span></div>
+          <div class="zh_list">交易金额：<span class="zh_list_content">{{dataItem[0].sell.money}}</span></div>
+          <hr class="zh_hr"/>
 
-</div>
+          <div class="zh_box">
+            <span class="zh_tr">菜名</span>
+            <span class="zh_tr">单价/kg</span>
+            <span class="zh_tr">重量kg</span>
+            <span class="zh_td">溯源信息</span>
+          </div>
+          <div class="zh_box" v-for="item in dataItem">
+            <span class="zh_tr">{{item.goods.name}}</span>
+            <span class="zh_tr">{{item.price}}</span>
+            <span class="zh_tr">{{item.weight}}</span>
+            <span class="zh_td">{{item.goods.supplier}}</span>
+          </div>
+          <a href="javascript:void(0)" @click="getAllShopInquireInfo"><div class="zh_list zh_footer">查看档口所有溯源信息</div></a>
 
-
+        </div>
+      </div>
+    <scroller>
   </section>
 </template>
 
 <script>
-  import { Scroller,Checklist,Box,XButton} from 'vux'
+  import {Scroller,Box} from 'vux'
   import ajax from 'src/ajax/index.js'
   import encryption from 'src/assets/js/encryption.js'
 
@@ -84,9 +87,15 @@
         }
         //this.disablevalue=false;
       },false)
+
+      setTimeout(function(){
+        var ws=plus.webview.getWebviewById('saoma');
+        plus.webview.close(ws);
+      },100)
+
 		},
 		components: {
-	    Scroller,Checklist,Box,XButton
+	    Scroller,Box
 	  },
 		data() {
 			return {

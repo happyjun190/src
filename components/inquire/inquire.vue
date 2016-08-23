@@ -15,55 +15,61 @@
       </div>
     </header>
   </section>
-  <!-- 分类 -->
-  <section class="category">
-  <!-- 蔬菜 -->
-    <article class="big_category big_category1">
-      <!-- 下拉 -->
-      <!-- 下拉 -->
-      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-        <div class="panel panel-default" v-for="item in dataItem.tracingSourceShopDatas">
-          <div class="panel-heading" role="tab" id="headingOne">
-            <h4 class="panel-title">
-              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-               <span>{{item.shop.name}}</span><span>(菜名·入货渠道·档口·入货重量)</span>
-               <div class="img">
-                <img id="d_n" style="display:none;" src="../../assets/images/down.png" alt="." onclick="fnImg(this,'d_i')" />
 
-                <img src="../../assets/images/up.png" alt="" id="d_i"  onclick="fnImg(this,'d_n')" />
-               </div>
-              </a>
-            </h4>
-          </div>
-          <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-            <div class="panel-body">
-              <!-- 蔬菜名 -->
-              <div class="vegetables">
-                <div class="greens greens1">
-                   <table>
-                    <tr v-for="goods in item.tracingSourceGoodsDatas">
-                      <td>{{goods.goods.name}}</td>
-                      <td>{{goods.supplier.name}}</td>
-                      <td>{{goods.supplier.addr}}</td>
-                      <td>{{goods.weigth}}{{goods.goods.unit.name}}</td>
-                    </tr>
-                  </table>
+  <scroller lock-x v-ref:scroller class="full_screen">
+    <div class="box">
+
+      <!-- 分类 -->
+      <section class="category">
+      <!-- 蔬菜 -->
+        <article class="big_category big_category1">
+          <!-- 下拉 -->
+          <!-- 下拉 -->
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default" v-for="item in dataItem.tracingSourceShopDatas">
+              <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                  <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                   <span>{{item.shop.name}}</span><span>(菜名·入货渠道·档口·入货重量)</span>
+                   <div class="img">
+                    <img id="d_n" style="display:none;" src="../../assets/images/down.png" alt="." onclick="fnImg(this,'d_i')" />
+
+                    <img src="../../assets/images/up.png" alt="" id="d_i"  onclick="fnImg(this,'d_n')" />
+                   </div>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                  <!-- 蔬菜名 -->
+                  <div class="vegetables">
+                    <div class="greens greens1">
+                       <table>
+                        <tr v-for="goods in item.tracingSourceGoodsDatas">
+                          <td>{{goods.goods.name}}</td>
+                          <td>{{goods.supplier.name}}</td>
+                          <td>{{goods.supplier.addr}}</td>
+                          <td>{{goods.weigth}}{{goods.goods.unit.name}}</td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
 
-    </article>
-  </section>
+        </article>
+      </section>
+    </div>
+  </scroller>
 </section>
 </div>
 <div v-else></div>
 </template>
 
 <script>
-  import { Scroller,Checklist,Box,XButton} from 'vux'
+  import { Scroller,Box} from 'vux'
   import ajax from 'src/ajax/index.js'
   import encryption from 'src/assets/js/encryption.js'
 
@@ -106,9 +112,14 @@
           }
         },false)
 
+        setTimeout(function(){
+          var ws=plus.webview.getWebviewById('saoma');
+          plus.webview.close(ws);
+        },100)
+
 		},
 		components: {
-	    Scroller,Checklist,Box,XButton
+	     Scroller,Box
 	  },
 		data() {
 			return {

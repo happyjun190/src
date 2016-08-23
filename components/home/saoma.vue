@@ -34,7 +34,7 @@
       text = 'EAN8: ';
       break;
     }
-    
+
     var ws=plus.webview.currentWebview();
     var words = ws.getURL().split('#!');
     var baseURL = words[0]+'#!/';
@@ -55,7 +55,7 @@
               baseURL = baseURL+'inquire?shopId='+data[0].shop.id+'&marketId='+'';
               //w = plus.webview.create(baseURL,'inquireView',{},{shopId:data[0].shop.id,marketId:""});
               w = plus.webview.create(baseURL);
-          }          
+          }
           w.show();
           //mui.toast("获取测试数据成功");
         }else{
@@ -63,7 +63,7 @@
         }
       }
     },false)
-    
+
 
   }
 

@@ -1,6 +1,4 @@
 <template>
-<!-- 布局容器 -->
-<section>
 <!-- 头部
   <section class="header">
     <header class="title">
@@ -21,32 +19,26 @@
   <scroller lock-x v-ref:scroller class="full_screen">
     <div class="box">
       <section class="message_2 record">
-      <div>
-        <div v-for="item in dataItem">
-          <div v-if="item.tracingSourceGoodsDatas.length > 0 ">
-            <div class="date">
-              <p>{{item.date}}</p>
-            </div>
-            <table>
-              <tr class="message_3" v-for="goods in item.tracingSourceGoodsDatas">
-                <td>{{goods.goods.name}}</td>
-                <td>{{goods.supplier.name}}</td>
-                <td>{{goods.supplier.addr}}</td>
-              </tr>
-            </table>
+        <div>
+          <div v-for="item in dataItem">
+            <div v-if="item.tracingSourceGoodsDatas.length > 0 ">
+              <div class="date">
+                <p>{{item.date}}</p>
+              </div>
+              <table>
+                <tr class="message_3" v-for="goods in item.tracingSourceGoodsDatas">
+                  <td>{{goods.goods.name}}</td>
+                  <td>{{goods.supplier.name}}</td>
+                  <td>{{goods.supplier.addr}}</td>
+                </tr>
+              </table>
             </div>
           </div>
         </div>
+      </section>
+    </div>
+  </scroller>
 
-        </section>
-      </div>
-    </scroller>
-</section>
-
-</div>
-
-
-  </section>
 </template>
 <script>
   import {Scroller,Box,XHeader} from 'vux'

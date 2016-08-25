@@ -63,12 +63,19 @@
   import ajax from 'src/ajax/index.js'
   import encryption from 'src/assets/js/encryption.js'
 
+  function getUrlParam(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+      var r = window.location.search.substr(1).match(reg); //匹配目标参数
+      if (r != null) return unescape(r[2]); return null; //返回参数值
+  }
 
   var dataItem = null;
   export default {
-		name: "tracingSource",
+		name: "tracingSourceSaoma",
 		ready(){
-        ajax.post("getMarketTracingSource", {
+        ajax.post("getTracingSource", {
+          shopId:getUrlParam('shopId'),
+          marketId:getUrlParam('marketId')
         }, (status,data) => {
           if(status){
             if(data!=null){

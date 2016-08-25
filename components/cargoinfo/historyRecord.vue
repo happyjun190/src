@@ -1,22 +1,15 @@
 <template>
-<!-- 头部
-  <section class="header">
-    <header class="title">
-      <div class="up">
-        <a href="javascript:history.go(-1);">
-        <img src="../../assets/images/left_1.png" alt="">
-  </a>
-      </div>
-      <div class="food_name">
-        <a href="">历史记录</a>
-      </div>
-    </header>
-  </section>
--->
-  <x-header :left-options="{showBack: true}" style="background-color:#fff;"><span style="color:#000;">历史记录</span></x-header>
 
+<div  class="page">
+  <!--
+  <x-header :left-options="{showBack: true}" style="background-color:#fff;"><span style="color:#000;">历史记录</span></x-header>
+  -->
+  <header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">历史记录</h1>
+  </header>
   <!-- 历史记录 -->
-  <scroller lock-x v-ref:scroller class="full_screen">
+  <scroller lock-x v-ref:scroller height="-44px" class="content">
     <div class="box">
       <section class="message_2 record">
         <div>
@@ -38,6 +31,7 @@
       </section>
     </div>
   </scroller>
+</div>
 
 </template>
 <script>
@@ -50,8 +44,6 @@
 		ready(){
       //执行登陆
       ajax.post("historyRecord", {
-        pageSize: "3",
-        pageNum: "1",
         shopId :"",
         marketId :"402883b6561760a801561762d3860140"
       }, (status,data) => {

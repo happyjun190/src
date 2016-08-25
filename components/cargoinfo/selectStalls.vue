@@ -1,23 +1,8 @@
 <template>
-    <!-- 头部
-    <section class="header">
-      <header class="title volume">
-        <div class="up">
-         <a href="javascript:history.go(-1);">
-          <img src="../../assets/images/left_1.png" alt="">
-    </a>
-        </div>
-        <div class="food_name">
-          <a href="JavaScript:void(0)">请选择档口</a>
-        </div>
-        <div class="history images">
-          <img src="../../assets/images/shut.png" alt="">
-        </div>
-      </header>
-    </section>
-    -->
+    
+  <div  class="page">
     <x-header :left-options="{showBack: true}" style="background-color:#fff;"><span style="color:#000;">请选择档口</span></x-header>
-    <scroller lock-x v-ref:scroller class="full_screen">
+    <scroller lock-x v-ref:scroller height="-44px" class="content">
       <div class="box">
 
         <!-- 选择档口 -->
@@ -33,18 +18,13 @@
         </section>
       </div>
     </scroller>
+  </div>
 </template>
 
 <script>
   import { Scroller,XHeader,Box} from 'vux'
   import ajax from 'src/ajax/index.js'
   import encryption from 'src/assets/js/encryption.js'
-
-  function getUrlParam(name) {
-      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-      var r = window.location.search.substr(1).match(reg); //匹配目标参数
-      if (r != null) return unescape(r[2]); return null; //返回参数值
-  }
 
   var dataItem;
   export default {
@@ -61,8 +41,14 @@
 			}
 		},
 		methods: {
-      goPurchaseVolume() {
-        this.$router.go('/purchaseVolume');
+      goPurchaseVolume(event) {
+        var goodsId = this.$route.query.goodsId;
+        var marketId = this.$route.query.marketId;
+        var supplierId = event.target.attributes["supplierId"].value;
+        this.$router.go({path:'/purchaseVolume',
+                         query:{goodsId:goodsId,marketId:marketId,supplierId:supplierId}, 
+                         params:{goodsId:goodsId,marketId:marketId,supplierId:supplierId}
+                       });
       }
 		}
 	}

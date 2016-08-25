@@ -36,7 +36,7 @@ body {
 }
 .content {
 	margin-top: 44px;
-	background: #eee;
+	background: #fff
 }
 .xs-container {
 }
@@ -75,23 +75,6 @@ body {
 	text-align: center;
 	padding: 10px 0px;
 }
-.mui-bar {
-	background: #048402 !important
-}
-.mui-bar .mui-title {
-	color: #fff !important
-}
-.mui-bar a:active {
-	color: #fff !important
-}
-.mui-bar a {
-	color: #fff !important
-}
-.vux-number-selector,
-.vux-number-input {
-	box-sizing: content-box !important;
-}
-
 .touched.modified.invalid {
 	color: #dd524d
 }
@@ -106,16 +89,4 @@ color: #dd524d
 }
 .touched.invalid:-ms-input-placeholder { /* Internet Explorer 10+ */
 color: #dd524d
-}
-.checker-item {
-	border: 1px solid #ccc;
-	text-align: center;
-	width: 30%;
-	margin: 2% 1.1%;
-	padding: 10px 0px;
-	background: #fff;
-}
-.checker-item-selected {
-	background: #fff;
-	border: 1px solid #04be02;
 }

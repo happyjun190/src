@@ -1,9 +1,12 @@
 <template>
-    <!-- 布局容器 -->
-    <section>
-      <!-- 头部 -->
-      <x-header :left-options="{showBack: true}" style="background-color:#04be02;">检测公布</x-header>
-      <scroller lock-x v-ref:scroller class="full_screen">
+  <div  class="page">
+      <!-- 头部 
+      <x-header :left-options="{showBack: true}" style="background-color:#04be02;">检测公布</x-header>-->
+      <header class="mui-bar mui-bar-nav" style="background-color:#04be02 !important;">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">检测公布</h1>
+      </header>
+      <scroller lock-x v-ref:scroller height="-44px" class="content">
         <div class="box">
           <!-- 检测公布 -->
           <section class="detect" v-for="item in dataItem">
@@ -31,7 +34,7 @@
 
         </div>
       </scroller>
-  </section>
+  </div>
 
 </template>
 
@@ -46,9 +49,7 @@
 		ready(){
       //执行登陆
       ajax.post("checkPublished", {
-        pageSize: "3",
-        pageNum: "1",
-        marketName:"bc96731e521811e6987cf8cab858db3f"
+      
       }, (status,data) => {
         if(status){
           if(data!=null){

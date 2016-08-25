@@ -1,75 +1,67 @@
 <template>
-    <!-- 布局容器 -->
-    <section>
-    <!-- 头部
-      <section class="header">
-        <header class="title">
-          <div class="up">
-           <a href="javascript:history.go(-1);">
-            <img src="../../assets/images/left_1.png" alt="" class="zh_img">
-           </a>
-          </div>
-          <div class="food_name">
-            <input type="text" value="请输入关键词" onfocus="if(this.value == '请输入关键词') this.value = ''" onblur="if(this.value =='') this.value = '请输入关键词'" />
-          </div>
-          <div class="history complete">
-            <a href="JavaScript:void(0)" @click="onComplete">完成</a>
-          </div>
-        </header>
-      </section>
-      -->
+    <!-- 布局容器 
+    <div  class="page">
       <x-header :left-options="{showBack: true, preventGoBack:false}" right-options="{showMore: true}"
                 style="background-color:#fff;"><span style="color:#000;">分类信息</span><span slot="right" @click="onComplete" style="color:#04be02;">完成</span>
-      </x-header>
+      </x-header>-->
+    <div  class="page">
+      <header class="mui-bar mui-bar-nav mui-btn-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title" v-el:market>分类信息</h1>
+        <span  @click="onComplete" style="color: #04be02;float: right;margin-top:12px;">完成</span>
+      </header>
 
-      <scroller lock-x v-ref:scroller class="full_screen">
+      <scroller lock-x v-ref:scroller height="-44px" class="content">
         <div class="box">
+          <img id="arrow_down" src="../../assets/images/down.png" style="display:none;" alt=""  />
+          <img id="arrow_up" src="../../assets/images/up.png" style="display:none;" alt="" />
           <!-- 分类 -->
           <section class="category">
           <!-- 蔬菜 -->
             <article class="big_category">
-
-              <img class="arrow_down" src="../../assets/images/down.png" style="display:none;" alt=""  />
-              <img class="arrow_up" src="../../assets/images/up.png" style="display:none;" alt="" />
-
-              <div class="vegetables_1">
-                <span>蔬菜</span>
-              </div>
-              <!-- 下拉 -->
-              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                <div class="panel panel-default"  v-for="(index, item) in dataItem">
-                  <div class="panel-heading" role="tab" id="headingOne">
-                    <h4 class="panel-title">
-                      <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                       <span>{{item.goodsClassify.name}}</span>
-                       <div class="img">
-                          <img class="arrow arrow_{{index+1}}" src="../../assets/images/up.png" down="../../assets/images/down.png" alt="" show="{{index+1}}" @click="fnImg" />
-                       </div>
-                      </a>
-                    </h4>
-                  </div>
-                  <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                    <div class="panel-body">
-                      <!-- 蔬菜名 -->
-                      <div class="vegetables">
-                        <div class="greens">
-                          <div class="greens_up up">
-                            <span v-for="goods in item.goods">
-                              <a href="JavaScript:void(0)" @click="selectGoods" goodsId="{{goods.goods.id}}" class="goodsclass" v-if="goods.selected==0">{{goods.goods.name}}</a>
-                              <a href="JavaScript:void(0)" @click="selectGoods" goodsId="{{goods.goods.id}}" class="goodsclass colorChange" v-else>{{goods.goods.name}}</a>
-                            </span>
+              <div v-for="category1 in dataItem">
+                <div class="vegetables_1">
+                  <span>{{category1.goodsClassify.name}}</span>
+                </div>
+                <!-- 下拉 -->
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                  <div class="panel panel-default"  v-for="category2 in category1.goodsQueryResults">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                      <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="JavaScript:void(0)" aria-expanded="true" aria-controls="collapseOne">
+                         <span>{{category2.goodsClassify.name}}</span>
+                         <div class="img">
+                            <img src="../../assets/images/down.png" class="down" alt="" @click="fnImg" goodClassifyId="{{category2.goodsClassify.id}}"/>
+                         </div>
+                        </a>
+                      </h4>
+                    </div>
+                    <!--<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" style="display:none">-->
+                    <div class="{{category2.goodsClassify.id}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" style="display:none">
+                      <div style="padding-body:0px">
+                        <!-- 蔬菜名 -->
+                        <div class="vegetables">
+                          <div class="greens">
+                            <div class="greens_up up">
+                              <span v-for="goods in category2.goods">
+                                <a href="JavaScript:void(0)" @click="selectGoods" goodsId="{{goods.goods.id}}" class="goodsclass" v-if="goods.selected==0">{{goods.goods.name}}</a>
+                                <a href="JavaScript:void(0)" @click="selectGoods" goodsId="{{goods.goods.id}}" class="goodsclass colorChange" v-else>{{goods.goods.name}}</a>
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+
               </div>
+              
             </article>
           </section>
         </div>
       </scroller>
-    </section>
+    </div>
 </template>
 
 
@@ -85,8 +77,7 @@
 		ready(){
       //执行登陆
       ajax.post("classification", {
-        pageSize:10000,
-        pageNum:1
+      
       }, (status,data) => {
         if(status){
           if(data!=null){
@@ -111,41 +102,30 @@
 		},
 		methods: {
       //下拉展开函数
-      fnImg(){
-
-        var arrow_down = $('.arrow_down').attr('src');
-        var arrow_up = $('.arrow_up').attr('src');
-        var show = $('.'+_x).attr('show');
-
-        if(show == 1){
-            $('.'+_x).attr('src',arrow_down);
-            $('.'+_x).attr('show',2);
-        }else{
-           $('.'+_x).attr('src',arrow_up);
-           $('.'+_x).attr('show',1);
+      fnImg(event){
+        var arrow_down = document.getElementById('arrow_down').src;
+        var arrow_up = document.getElementById('arrow_up').src;
+        var class1 = event.target.attributes["class"].value;
+        var goodClassifyId = event.target.attributes["goodClassifyId"].value
+        
+        if(class1=='down') {
+          event.target.setAttribute('src', arrow_up);
+          event.target.setAttribute('class', 'up');
+        } else {
+          event.target.setAttribute('src', arrow_down);
+          event.target.setAttribute('class', 'down');
         }
-        //_this.style.display = 'none';
-        //document.getElementById('d_i').style.display = 'none';
-        //document.getElementById('d_i').style.src = '../../assets/images/down.png';
-        //$('#d_i').attr('src','src/assets/images/down.png');
-        //document.getElementById(_x).style.display = 'block';
+        //alert(document.getElementsByClassName(goodClassifyId)[0].attributes['class'].value);
+        var displayValue = document.getElementsByClassName(goodClassifyId)[0].attributes['style'].value;
+
+        if(displayValue=='') {
+          document.getElementsByClassName(goodClassifyId)[0].setAttribute('style','display:none')
+        } else {
+          document.getElementsByClassName(goodClassifyId)[0].setAttribute('style','')
+        }
       },
 
       onComplete() {
-        /*var goodsIdArray=new Array();
-        var index = 0;
-        $(".goodsclass").each(function(){
-
-          var goodsId = $(this).attr('goodsId');
-          var goodsClass = $(this).attr('class');
-          //alert(goodsClass);
-          if(goodsClass=="goodsclass") {
-            //DO NOTHING
-          } else {
-            goodsIdArray[index++] = goodsId;
-          }
-
-        });*/
         var goodsIdArray=new Array();
         var index = 0;
         var i;
@@ -159,14 +139,12 @@
             goodsIdArray[index++] = goodsId;
           }
         }
-
         if(goodsIdArray.length==0) {
           this.$router.go('/cargoinfo');
         } else {
           var goodsIdStr = goodsIdArray.toString();
           //执行登陆
           ajax.post("addtracingsource", {
-            userId:"",
             supplierId:"",
             goodsIds:goodsIdStr,
             weigth:0

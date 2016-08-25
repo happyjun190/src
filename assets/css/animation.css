@@ -10,7 +10,7 @@
 .popOut-leave,
 .popIn-enter,
 .popIn-leave {
-  /*overflow-y: hidden;*/
+  overflow-y: hidden;
 }
 .popOut-enter {
 	z-index: -1;

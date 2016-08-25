@@ -1,25 +1,14 @@
 <template>
-<!-- 布局容器 -->
-  <section>
+    <div  class="page">
     <!-- 头部
-    <section class="header">
-      <header class="title1">
-        <div class="up">
-          <a href="JavaScript:void(0)" @click="closeCurrentPage">
-              <img src="../../assets/images/left_1.png" alt="">
-        </a>
-        </div>
-        <div class="food_name">
-          <a href="">查询结果</a>
-        </div>
-      </header>
-    </section>
+    <x-header :left-options="{showBack: true}" style="background-color:#04be02;">查询结果</x-header>
     -->
-    <!-- 头部-->
-    <x-header :left-options="{showBack: true, preventGoBack:true}" style="background-color:#04be02;">查询结果</x-header>
+    <header class="mui-bar mui-bar-nav" style="background-color:#04be02 !important;">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">查询结果</h1>
+    </header>
 
-
-    <scroller lock-x v-ref:scroller class="full_screen">
+    <scroller lock-x v-ref:scroller height="-44px" class="content">
       <div class="box">
         <div class="zh_main">
           <div class="zh_list">订单编号：<span class="zh_list_content">{{dataItem[0].sell.code}}</span></div>
@@ -48,7 +37,7 @@
         </div>
       </div>
     <scroller>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -56,15 +45,15 @@
   import ajax from 'src/ajax/index.js'
   import encryption from 'src/assets/js/encryption.js'
 
-  function plusReady() {
-
-  }
-  //扩展API加载完毕后调用onPlusReady回调函数
-  if(window.plus) {
-     plusReady();
-  } else {
-     document.addEventListener( "plusready", plusReady, false );
-  }
+  // function plusReady() {
+  //
+  // }
+  // //扩展API加载完毕后调用onPlusReady回调函数
+  // if(window.plus) {
+  //    plusReady();
+  // } else {
+  //    document.addEventListener( "plusready", plusReady, false );
+  // }
 
   function getUrlParam(name) {
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
@@ -79,7 +68,7 @@
 		ready(){
       //查询信息
       ajax.post("getSellDetails", {
-        sellId:getUrlParam("orderId")
+        sellId:getUrlParam('orderId')
       }, (status,data) => {
         if(status){
           if(data!=null){
@@ -92,10 +81,10 @@
         //this.disablevalue=false;
       },false)
 
-      setTimeout(function(){
-        var ws=plus.webview.getWebviewById('saoma');
-        plus.webview.close(ws);
-      },100)
+      // setTimeout(function(){
+      //   var ws=plus.webview.getWebviewById('saoma');
+      //   plus.webview.close(ws);
+      // },100)
 
 		},
 		components: {
@@ -109,21 +98,13 @@
 		methods: {
 			//查看所有溯源信息
 			getAllShopInquireInfo(){
-          var ws=plus.webview.currentWebview();
-          var words = ws.getURL().split('#!');
-          var baseURL = words[0]+'#!/';
-          var w = plus.webview.create(baseURL+'inquire');
-					w.show();
-			},
-      closeCurrentPage() {
-          var ws=plus.webview.currentWebview();
-          plus.webview.close(ws);
-      }
-		},
-    events: {
-        onClickBack: function() {
-            alert("back");
-        }
-    }
+          // var ws=plus.webview.currentWebview();
+          // var words = ws.getURL().split('#!');
+          // var baseURL = words[0]+'#!/';
+          // var w = plus.webview.create(baseURL+'inquire');
+					// w.show();
+					this.$router.go('/tracingSource');
+			}
+		}
 	}
 </script>

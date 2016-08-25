@@ -1,22 +1,34 @@
 //配置页面
 module.exports = function(router) {
 	router.map({
-		//登陆
+		//商家端
 		'/': {
 			component: function (resolve) {
-				require(['./components/home/login.vue'], resolve)
+				require(['./components/login/login.vue'], resolve)
 			}
 		},
-		//登陆
-		'/login': {
+		//商家注册
+		'/login/register': {
 			component: function (resolve) {
-				require(['./components/home/login.vue'], resolve)
+				require(['./components/login/register.vue'], resolve)
 			}
 		},
-		//注册
-		'/register': {
+		//商家注册.密码
+		'/login/register-password': {
 			component: function (resolve) {
-				require(['./components/home/register.vue'], resolve)
+				require(['./components/login/register-password.vue'], resolve)
+			}
+		},
+		//忘记密码.手机验证
+		'/login/forgot-phone': {
+			component: function (resolve) {
+				require(['./components/login/forgot-phone.vue'], resolve)
+			}
+		},
+		//忘记密码
+		'/login/forgot-password': {
+			component: function (resolve) {
+				require(['./components/login/forgot-password.vue'], resolve)
 			}
 		},
 		//主页
@@ -46,6 +58,12 @@ module.exports = function(router) {
 		'/tracingSource': {
 			component: function (resolve) {
 				require(['./components/home/tracingSource.vue'], resolve)
+			}
+		},
+		//溯源信息查询
+		'/tracingSourceSaoma': {
+			component: function (resolve) {
+				require(['./components/home/tracingSourceSaoma.vue'], resolve)
 			}
 		},
 		//溯源信息查询

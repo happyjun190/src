@@ -1,7 +1,6 @@
 import mui from 'mui';
 import UrlConfig from './UrlConfig.js'
 import GetErrorMsg from './error.js'
-import error_log from '../assets/js/error-log.js'
 import {login} from '../assets/js/login.js'
 //匹配路径
 let matchUrl=function(val){
@@ -28,34 +27,31 @@ let throwError = function(responseText) {
 }
 
 let ajax = {
-	post: function(base_url, data, success,waiting=true) {
-		this.mui_ajax(base_url,"",FormatParameters(data),success,"post",waiting)
+	post: function(base_url, data, success) {
+		this.mui_ajax(base_url,"",FormatParameters(data),success,"post")
 	},
 
-	get: function(base_url, data, success,waiting=true) {
-		this.mui_ajax(base_url,"",data,success,"get",waiting)
+	get: function(base_url, data, success) {
+		this.mui_ajax(base_url,"",data,success,"get")
 	},
 
-	Add: function(base_url, data, success,waiting=true) {
-		this.mui_ajax(base_url,"/add",FormatParameters(data),success,"post",waiting)
+	Add: function(base_url, data, success) {
+		this.mui_ajax(base_url,"/add",FormatParameters(data),success,"post")
 	},
 
-	Update: function(base_url, data, success,waiting=true) {
-		this.mui_ajax(base_url,"/update",FormatParameters(data),success,"post",waiting)
+	Update: function(base_url, data, success) {
+		this.mui_ajax(base_url,"/update",FormatParameters(data),success,"post")
 	},
 
-	Del: function(base_url, data, success,waiting=true) {
-		this.mui_ajax(base_url,"/del",FormatParameters(data),success,"post",waiting)
+	Del: function(base_url, data, success) {
+		this.mui_ajax(base_url,"/del",FormatParameters(data),success,"post")
 	},
 
-	Get: function(base_url, data, success,waiting=true) {
-		this.mui_ajax(base_url,"/get",data,success,"get",waiting)
+	Get: function(base_url, data, success) {
+		this.mui_ajax(base_url,"/get",data,success,"get")
 	},
 
-	mui_ajax: function(base_url,path,data,success,type,waiting){
-		if(waiting){
-			plus.nativeUI.showWaiting("正在处理，请稍后...",{back:"none"});
-		}
+	mui_ajax: function(base_url,path,data,success,type){
 		let Url=matchUrl(base_url)
 		let Data=""
 		if(typeof data=="object"){
@@ -76,23 +72,16 @@ let ajax = {
 				},
 				headers: {'Content-Type':'application/json;charset=UTF-8'},
 				success: (data,textStatus,xhr)=>{
-					if(waiting){
-						plus.nativeUI.closeWaiting();
-						// mui.toast("查询成功")
-					}
 					success(true,data)
 				},
 				error: (xhr,type,errorThrown)=>{
-					if(waiting){
-						plus.nativeUI.closeWaiting();
-					}
-					this.error(xhr,type,errorThrown,Url,data,success)
+					this.error(xhr,type,errorThrown,Url,success)
 				}
 			});
 		}
 	},
 	//错误处理
-	error: function(xhr,type,errorThrown,Url,data,success){
+	error: function(xhr,type,errorThrown,Url,success){
 		let response=""
 		try {
 			response=JSON.parse(xhr.responseText).msg
@@ -101,9 +90,9 @@ let ajax = {
 		}
 		let responseText=response?response:xhr.responseText
 		console.log("api:"+Url+"\nmsg:"+GetErrorMsg(responseText)+"\nstatus："+xhr.status+"\ntype: "+type);
-
-		if((Url.split(":").length-1)>1){
-			let ErrorMsg="api:"+Url+"\nmsg:"+GetErrorMsg(responseText)+"\n状态："+xhr.status+"\n类型: "+GetErrorMsg(type)
+		if(Url.indexOf(":")>-1){
+			let ErrorMsg=GetErrorMsg(responseText)+"\n状态："+xhr.status+"\n类型: "+GetErrorMsg(type)
+			ErrorMsg="api:"+Url+"\nmsg:"+ErrorMsg
 			mui.alert(ErrorMsg,"错误提示","确定",()=>{
 				if (throwError(responseText)) {
 					success(false,responseText)
@@ -115,14 +104,6 @@ let ajax = {
 					success(false,responseText)
 				}
 		}
-		error_log({
-			"url":Url.split("services")[1],//错误信息的接口地址如果有就记录
-		  "type":type,//接口错误类型
-		  "status":xhr.status,//接口错误状态
-		  "data":typeof(data)=="object"?data:JSON.parse(data),//发送给接口的数据，如果有就记录
-			"error":responseText,//错误信息
-			"responseText":responseText//服务器返回的错误
-		})
 	}
 }
 

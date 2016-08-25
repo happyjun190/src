@@ -55,11 +55,11 @@
   //    document.addEventListener( "plusready", plusReady, false );
   // }
 
-  function getUrlParam(name) {
-      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-      var r = window.location.search.substr(1).match(reg); //匹配目标参数
-      if (r != null) return unescape(r[2]); return null; //返回参数值
-  }
+  // function getUrlParam(name) {
+  //     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+  //     var r = window.location.search.substr(1).match(reg); //匹配目标参数
+  //     if (r != null) return unescape(r[2]); return null; //返回参数值
+  // }
 
 
   var dataItem;
@@ -68,14 +68,13 @@
 		ready(){
       //查询信息
       ajax.post("getSellDetails", {
-        sellId:getUrlParam('orderId')
+        sellId:this.$route.query.orderId
       }, (status,data) => {
         if(status){
           if(data!=null){
             this.dataItem = data;
-            mui.toast("获取数据成功");
           }else{
-            mui.toast("获取测试数据失败");
+            mui.toast("暂无订单数据");
           }
         }
         //this.disablevalue=false;

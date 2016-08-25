@@ -27,68 +27,66 @@
   //   }
   // });
 
-  function onmarked( type, result ) {
-    var text = '未知: ';
-    switch(type){
-      case plus.barcode.QR:
-      text = 'QR: ';
-      break;
-      case plus.barcode.EAN13:
-      text = 'EAN13: ';
-      break;
-      case plus.barcode.EAN8:
-      text = 'EAN8: ';
-      break;
-    }
-
-    //执行登陆
-    ajax.post("qrcScanedQuery", {
-      qrcode:result
-    }, (status,data) => {
-      if(status){
-        if(data!=null){
-          var type = data.type;
-          if(type=='order') {
-              // this.$router.go({path:'/checkPublishedDb',
-              //                  query:{orderId:data.sell.id},
-              //                  params:{orderId:data.sell.id}
-              //                });
-              mui.plusReady(()=> {
-                plus.storage.setItem("orderId", data.sell.id);
-                plus.storage.setItem("type", type);
-                mui.back();
-              })
-          } else {
-              // this.$router.go({path:'/tracingSourceSaoma',
-              //                  query:{shopId:data.shop.id,marketId:data.shop.market.id},
-              //                  params:{shopId:data.shop.id,marketId:data.shop.market.id}
-              //                });
-              mui.plusReady(()=> {
-                plus.storage.setItem("type", type);
-                plus.storage.setItem("shopId", data.shop.id);
-                plus.storage.setItem("marketId", data.shop.market.id);
-                mui.back();
-              })
-          }
-        }else{
-          mui.toast("未查询到数据");
-        }
-      }
-    },false)
-
-
-  }
+  // function onmarked( type, result ) {
+  //   var text = '未知: ';
+  //   switch(type){
+  //     case plus.barcode.QR:
+  //     text = 'QR: ';
+  //     break;
+  //     case plus.barcode.EAN13:
+  //     text = 'EAN13: ';
+  //     break;
+  //     case plus.barcode.EAN8:
+  //     text = 'EAN8: ';
+  //     break;
+  //   }
+  //
+  //   //执行登陆
+  //   ajax.post("qrcScanedQuery", {
+  //     qrcode:result
+  //   }, (status,data) => {
+  //     if(status){
+  //       if(data!=null){
+  //         var type = data.type;
+  //         if(type=='order') {
+  //             // this.$router.go({path:'/checkPublishedDb',
+  //             //                  query:{orderId:data.sell.id},
+  //             //                  params:{orderId:data.sell.id}
+  //             //                });
+  //             mui.plusReady(()=> {
+  //               plus.storage.setItem("orderId", data.sell.id);
+  //               plus.storage.setItem("type", type);
+  //               mui.back();
+  //             })
+  //         } else {
+  //             // this.$router.go({path:'/tracingSourceSaoma',
+  //             //                  query:{shopId:data.shop.id,marketId:data.shop.market.id},
+  //             //                  params:{shopId:data.shop.id,marketId:data.shop.market.id}
+  //             //                });
+  //             mui.plusReady(()=> {
+  //               plus.storage.setItem("type", type);
+  //               plus.storage.setItem("shopId", data.shop.id);
+  //               plus.storage.setItem("marketId", data.shop.market.id);
+  //               mui.back();
+  //             })
+  //         }
+  //       }else{
+  //         mui.toast("未查询到数据");
+  //       }
+  //     }
+  //   },false)
+  // }
 
 
   export default {
 		name: "saoma",
     ready() {
-      var webViewId = this.$route.query.webViewId;
-      alert(webViewId);
+      // var webViewId = this.$route.query.webViewId;
+      // alert(webViewId);
     },
 		attached(){
         scan = new plus.barcode.Barcode('bcid');
-        scan.onmarked = onmarked;
+        scan.onmarked = this.onmarked();
         scan.start()
 		},
     detached(){
@@ -102,6 +100,55 @@
 			}
 		},
 		methods: {
+      onmarked( type, result ) {
+        var text = '未知: ';
+        switch(type){
+          case plus.barcode.QR:
+          text = 'QR: ';
+          break;
+          case plus.barcode.EAN13:
+          text = 'EAN13: ';
+          break;
+          case plus.barcode.EAN8:
+          text = 'EAN8: ';
+          break;
+        }
+
+        //执行登陆
+        ajax.post("qrcScanedQuery", {
+          qrcode:result
+        }, (status,data) => {
+          if(status){
+            if(data!=null){
+              var type = data.type;
+              if(type=='order') {
+                  this.$router.go({path:'/checkPublishedDb',
+                                   query:{orderId:data.sell.id},
+                                   params:{orderId:data.sell.id}
+                                 });
+                  // mui.plusReady(()=> {
+                  //   plus.storage.setItem("orderId", data.sell.id);
+                  //   plus.storage.setItem("type", type);
+                  //   mui.back();
+                  // })
+              } else {
+                  this.$router.go({path:'/tracingSourceSaoma',
+                                   query:{shopId:data.shop.id,marketId:data.shop.market.id},
+                                   params:{shopId:data.shop.id,marketId:data.shop.market.id}
+                                 });
+                  // mui.plusReady(()=> {
+                  //   plus.storage.setItem("type", type);
+                  //   plus.storage.setItem("shopId", data.shop.id);
+                  //   plus.storage.setItem("marketId", data.shop.market.id);
+                  //   mui.back();
+                  // })
+              }
+            }else{
+              mui.toast("未查询到数据");
+            }
+          }
+        },false)
+      }
 		}
 	}
 </script>

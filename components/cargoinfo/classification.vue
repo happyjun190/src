@@ -1,5 +1,5 @@
 <template>
-    <!-- 布局容器 
+    <!-- 布局容器
     <div  class="page">
       <x-header :left-options="{showBack: true, preventGoBack:false}" right-options="{showMore: true}"
                 style="background-color:#fff;"><span style="color:#000;">分类信息</span><span slot="right" @click="onComplete" style="color:#04be02;">完成</span>
@@ -25,7 +25,27 @@
                 </div>
                 <!-- 下拉 -->
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                  <div class="panel panel-default"  v-for="category2 in category1.goodsQueryResults">
+                  <!-- <ul class="mui-table-view" v-for="category2 in category1.goodsQueryResults" style="padding-left:8px;padding-right:8px;"> -->
+                  <ul class="mui-table-view" v-for="category2 in category1.goodsQueryResults">
+                      <li class="mui-table-view-cell mui-collapse">
+                          <a class="mui-navigate-right" href="#" style="color:#04be02;font-size:1.3rem;background-color:#e9e9e9;">{{category2.goodsClassify.name}}</a>
+                          <div class="mui-collapse-content" style="padding-body:0px">
+                            <div class="vegetables">
+                              <div class="greens">
+                                <div class="greens_up up">
+                                  <span v-for="goods in category2.goods">
+                                    <a href="JavaScript:void(0)" @click="selectGoods" goodsId="{{goods.goods.id}}" class="goodsclass" v-if="goods.selected==0">{{goods.goods.name}}</a>
+                                    <a href="JavaScript:void(0)" @click="selectGoods" goodsId="{{goods.goods.id}}" class="goodsclass colorChange" v-else>{{goods.goods.name}}</a>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                      </li>
+                  </ul>
+
+
+                  <!-- <div class="panel panel-default"  v-for="category2 in category1.goodsQueryResults">
                     <div class="panel-heading" role="tab" id="headingOne">
                       <h4 class="panel-title">
                         <a role="button" data-toggle="collapse" data-parent="#accordion" href="JavaScript:void(0)" aria-expanded="true" aria-controls="collapseOne">
@@ -36,10 +56,9 @@
                         </a>
                       </h4>
                     </div>
-                    <!--<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" style="display:none">-->
+
                     <div class="{{category2.goodsClassify.id}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" style="display:none">
                       <div style="padding-body:0px">
-                        <!-- 蔬菜名 -->
                         <div class="vegetables">
                           <div class="greens">
                             <div class="greens_up up">
@@ -52,11 +71,11 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
 
               </div>
-              
+
             </article>
           </section>
         </div>
@@ -77,7 +96,7 @@
 		ready(){
       //执行登陆
       ajax.post("classification", {
-      
+
       }, (status,data) => {
         if(status){
           if(data!=null){
@@ -107,7 +126,7 @@
         var arrow_up = document.getElementById('arrow_up').src;
         var class1 = event.target.attributes["class"].value;
         var goodClassifyId = event.target.attributes["goodClassifyId"].value
-        
+
         if(class1=='down') {
           event.target.setAttribute('src', arrow_up);
           event.target.setAttribute('class', 'up');

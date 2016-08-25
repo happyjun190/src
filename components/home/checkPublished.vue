@@ -1,6 +1,6 @@
 <template>
   <div  class="page">
-      <!-- 头部 
+      <!-- 头部
       <x-header :left-options="{showBack: true}" style="background-color:#04be02;">检测公布</x-header>-->
       <header class="mui-bar mui-bar-nav" style="background-color:#04be02 !important;">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
@@ -49,14 +49,14 @@
 		ready(){
       //执行登陆
       ajax.post("checkPublished", {
-      
+
       }, (status,data) => {
         if(status){
           if(data!=null){
             this.dataItem = data;
-            mui.toast("获取测试数据成功");
+            //mui.toast("获取测试数据成功");
           }else{
-            mui.toast("获取测试数据失败");
+            mui.toast("暂无检测数据");
           }
         }
         //this.disablevalue=false;

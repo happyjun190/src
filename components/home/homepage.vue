@@ -140,7 +140,6 @@
   export default {
 		name: "homepage",
 		ready(){
-
 		},
 		components: {
 	    Scroller,Box,XHeader

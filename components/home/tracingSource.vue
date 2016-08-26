@@ -3,9 +3,9 @@
 <div class="page" >
 
   <!--<x-header :left-options="{showBack: true}" style="background-color:#04be02;">{{dataItem.market.name}}</x-header>-->
-  <header class="mui-bar mui-bar-nav" style="background-color:#04be02 !important;">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">{{dataItem.market.name}}</h1>
+  <header class="mui-bar mui-bar-nav">
+      <span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></span>
+      <h1 class="mui-title">{{dataItem?dataItem.market.name:''}}</h1>
   </header>
   <scroller lock-x v-ref:scroller height="-44px" class="content">
     <div class="box">
@@ -72,6 +72,9 @@
   export default {
 		name: "tracingSource",
 		ready(){
+        
+    },
+    attached(){
         ajax.post("getMarketTracingSource", {
         }, (status,data) => {
           if(status){
@@ -95,29 +98,10 @@
 			}
 		},
 		methods: {
-      //下拉展开函数
-      fnImg(event){
-        var arrow_down = document.getElementById('arrow_down').src;
-        var arrow_up = document.getElementById('arrow_up').src;
-        var class1 = event.target.attributes["class"].value;
-        var shopId = event.target.attributes["shopId"].value
-
-        if(class1=='down') {
-          event.target.setAttribute('src', arrow_up);
-          event.target.setAttribute('class', 'up');
-        } else {
-          event.target.setAttribute('src', arrow_down);
-          event.target.setAttribute('class', 'down');
-        }
-
-        //alert(document.getElementsByClassName(goodClassifyId)[0].attributes['class'].value);
-        var displayValue = document.getElementById(shopId).attributes['style'].value;
-        //alert(displayValue);
-        if(displayValue=='') {
-          document.getElementById(shopId).setAttribute('style','display:none')
-        } else {
-          document.getElementById(shopId).setAttribute('style','')
-        }
+      reset(){//重新计算页面高度
+        this.$nextTick(() => {
+            this.$refs.scroller.reset()
+        })
       }
 
 		}

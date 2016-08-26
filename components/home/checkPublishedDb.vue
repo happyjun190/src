@@ -3,8 +3,8 @@
     <!-- 头部
     <x-header :left-options="{showBack: true}" style="background-color:#04be02;">查询结果</x-header>
     -->
-    <header class="mui-bar mui-bar-nav" style="background-color:#04be02 !important;">
-        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <header class="mui-bar mui-bar-nav">
+        <span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></span>
         <h1 class="mui-title">查询结果</h1>
     </header>
 
@@ -16,7 +16,7 @@
           <div class="zh_list">所在市场：<span class="zh_list_content">{{dataItem[0].sell.shop.name}}</span></div>
           <div class="zh_list">交易档口：<span class="zh_list_content">{{dataItem[0].sell.shop.market.name}}</span></div>
           <div class="zh_list">会员卡号：<span class="zh_list_content">{{dataItem[0].sell.card.codeCardFace}}</span></div>
-          <div class="zh_list">支付方式：<span class="zh_list_content">{{dataItem[0].sell.paymode}}</span></div>
+          <div class="zh_list">支付方式：<span class="zh_list_content">{{dataItem[0].sell.paymode|payMode}}</span></div>
           <div class="zh_list">交易金额：<span class="zh_list_content">{{dataItem[0].sell.money}}</span></div>
           <hr class="zh_hr"/>
 
@@ -32,7 +32,7 @@
             <span class="zh_tr">{{item.weight}}</span>
             <span class="zh_td">{{item.goods.supplier}}</span>
           </div>
-          <a href="javascript:void(0)" @click="getAllShopInquireInfo"><div class="zh_list zh_footer">查看档口所有溯源信息</div></a>
+          <span href="javascript:void(0)" @click="getAllShopInquireInfo"><div class="zh_list zh_footer">查看档口所有溯源信息</div></span>
 
         </div>
       </div>
@@ -45,27 +45,14 @@
   import ajax from 'src/ajax/index.js'
   import encryption from 'src/assets/js/encryption.js'
 
-  // function plusReady() {
-  //
-  // }
-  // //扩展API加载完毕后调用onPlusReady回调函数
-  // if(window.plus) {
-  //    plusReady();
-  // } else {
-  //    document.addEventListener( "plusready", plusReady, false );
-  // }
-
-  // function getUrlParam(name) {
-  //     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-  //     var r = window.location.search.substr(1).match(reg); //匹配目标参数
-  //     if (r != null) return unescape(r[2]); return null; //返回参数值
-  // }
-
 
   var dataItem;
   export default {
 		name: "checkPublishedDb",
 		ready(){
+        
+    },
+    attached(){
       //查询信息
       ajax.post("getSellDetails", {
         sellId:this.$route.query.orderId
@@ -80,10 +67,6 @@
         //this.disablevalue=false;
       },false)
 
-      // setTimeout(function(){
-      //   var ws=plus.webview.getWebviewById('saoma');
-      //   plus.webview.close(ws);
-      // },100)
 
 		},
 		components: {
@@ -94,6 +77,11 @@
         dataItem:""
 			}
 		},
+    filters: {
+      payMode : function (val) {
+        return ['支付宝', '微信', '闪付', '现金', '会员卡'][val]
+      }
+    },
 		methods: {
 			//查看所有溯源信息
 			getAllShopInquireInfo(){
@@ -103,7 +91,12 @@
           // var w = plus.webview.create(baseURL+'inquire');
 					// w.show();
 					this.$router.go('/tracingSource');
-			}
+			},
+      reset(){//重新计算页面高度
+        this.$nextTick(() => {
+            this.$refs.scroller.reset()
+        })
+      }
 		}
 	}
 </script>

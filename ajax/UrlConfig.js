@@ -30,19 +30,28 @@ const url = {
 	update:ip+"/shop/update/version.json",//版本更新
 	verifyCode:base+"user/verifyCode",//验证手机验证码
 
-	buyerMemberReg:base+"member/reg",//买家用户注册
 
-	checkPublished:base+"supervisory/getMarketDetectionInfos",//食品检验列表
-	qrcScanedQuery:base+"qrcode/qrcScanedQuery",//扫码详情
-	getSellDetails:base+"customerselldetail/getSellDetails",//获取订单详情
-	getTracingSource:base+"tracingsource/getTracingSource",//溯源信息列表查询
-	classification:base+"sellergoods/get",//获取菜品分类信息
-	historyRecord:base+"tracingsource/getShopTracingSourceGroupByDate",//获取进货历史记录
-	getSellerSupplier:base+"sellersupplier/get",//入货信息
-	getShopTracingSourceForToday:base+"tracingsource/getShopTracingSourceForToday",//获取档口录入货物信息(溯源信息)
-	addtracingsource:base+"tracingsource/addtracingsource",//溯源信息录入
-	updateTracingSource:base+"tracingsource/updateTracingSource",//溯源信息批量更新
-	getMarketTracingSource:base+"tracingsource/getMarketTracingSource"//买家获取溯源信息
+
+	//important :需要引入css文件
+
+	//买家vue文件在cargoinfo目录
+	//登陆vue文件在login目录
+	buyerMemberReg:base+"member/reg",//买家-用户注册
+	checkPublished:base+"supervisory/getMarketDetectionInfos",//买家-食品检验列表
+	qrcScanedQuery:base+"qrcode/qrcScanedQuery",//买家-扫码详情
+	getSellDetails:base+"customerselldetail/getSellDetails",//买家-获取订单详情
+	getTracingSource:base+"tracingsource/getTracingSource",//买家-溯源信息列表查询
+	getMarketTracingSource:base+"tracingsource/getMarketTracingSource",//买家-获取溯源信息
+
+	//卖家vue文件在home目录
+	classification:base+"sellergoods/get",//卖家-获取菜品分类信息
+	historyRecord:base+"tracingsource/getShopTracingSourceGroupByDate",//卖家-获取进货历史记录
+	getSellerSupplier:base+"sellersupplier/get",//卖家-入货信息
+	getShopTracingSourceForToday:base+"tracingsource/getShopTracingSourceForToday",//卖家-获取档口录入货物信息(溯源信息)
+	addtracingsource:base+"tracingsource/addtracingsource",//卖家-溯源信息录入
+	updateTracingSource:base+"tracingsource/updateTracingSource",//卖家-溯源信息更新
+	commitTracingSource:base+"tracingsource/commitTracingSource",//卖家-溯源信息提交
+	deleteTracingSource:base+"tracingsource/deleteTracingSource"//卖家-删除溯源记录
 
 }
 module.exports = url

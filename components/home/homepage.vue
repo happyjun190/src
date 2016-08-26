@@ -9,7 +9,9 @@
     </section>
   -->
   <div  class="page">
-    <x-header :left-options="{showBack: false}" style="background-color:#04be02;">食安菜妈</x-header>
+    <header class="mui-bar mui-bar-nav">
+      <h1 class="mui-title">食安菜妈</h1>
+    </header>
       <scroller lock-x v-ref:scroller class="full_screen" height="-100px">
         <div class="box">
           <!-- 轮播图 -->
@@ -40,24 +42,24 @@
           <section class="list">
             <ul class="row">
               <li class="col-sm-4 col-xs-4 text-center">
-                <a href="JavaScript:void(0)" @click="goTracingSource">
+                <span href="JavaScript:void(0)" @click="goTracingSource">
                   <img src="../../assets/images/list_1.png" alt="">
                   <span>溯源查询</span>
-                </a>
+                </span>
               </li>
 
               <li class="col-sm-4 col-xs-4 text-center">
-                <a href="JavaScript:void(0)" @click="goCheckPublished">
+                <span href="JavaScript:void(0)" @click="goCheckPublished">
                   <img src="../../assets/images/list_2.png" alt="">
                   <span>检测公布</span>
-                </a>
+                </span>
               </li>
 
               <li class="col-sm-4 col-xs-4 text-center">
-                <a href="JavaScript:void(0)" @click="needDevelop">
+                <span href="JavaScript:void(0)" @click="needDevelop">
                   <img src="../../assets/images/list_3.png" alt="">
                   <span>近期账单</span>
-                </a>
+                </span>
               </li>
             </ul>
           </section>
@@ -106,23 +108,23 @@
         <footer class="list_1">
           <ul class="row">
           <li class="col-sm-4 col-xs-4 text-center">
-            <a href="JavaScript:void(0)">
+            <span href="JavaScript:void(0)">
               <img src="../../assets/images/photo_2.png" alt="">
               <span>首页</span>
-            </a>
+            </span>
           </li>
           <li class="col-sm-4 col-xs-4 text-center">
-            <a href="JavaScript:void(0)" @click="goSaoma">
+            <span href="JavaScript:void(0)" @click="goSaoma">
               <img src="../../assets/images/photo_3.png" alt="">
               <span>扫一扫</span>
-            </a>
+            </span>
           </li>
 
           <li class="col-sm-4 col-xs-4 text-center">
-            <a href="JavaScript:void(9)" @click="goCargoinfo">
+            <span href="JavaScript:void(0)" @click="needDevelop">
               <img src="../../assets/images/photo_4.png" alt="">
               <span>个人</span>
-            </a>
+            </span>
           </li>
         </ul>
         </footer>
@@ -160,10 +162,13 @@
         this.$router.go('/saoma');
       },
       needDevelop(){
+        this.$router.go('/cargoinfo');
         mui.toast("功能开发中");
       },
-      goCargoinfo(){
-        this.$router.go('/cargoinfo');
+      reset(){//重新计算页面高度
+        this.$nextTick(() => {
+            this.$refs.scroller.reset()
+        })
       }
 		}
 	}

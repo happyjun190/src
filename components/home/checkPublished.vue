@@ -2,8 +2,8 @@
   <div  class="page">
       <!-- 头部
       <x-header :left-options="{showBack: true}" style="background-color:#04be02;">检测公布</x-header>-->
-      <header class="mui-bar mui-bar-nav" style="background-color:#04be02 !important;">
-        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <header class="mui-bar mui-bar-nav">
+        <span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></span>
         <h1 class="mui-title">检测公布</h1>
       </header>
       <scroller lock-x v-ref:scroller height="-44px" class="content">
@@ -47,6 +47,9 @@
   export default {
 		name: "checkPublished",
 		ready(){
+        
+    },
+    attached(){
       //执行登陆
       ajax.post("checkPublished", {
 
@@ -71,7 +74,11 @@
 			}
 		},
 		methods: {
-
+      reset(){//重新计算页面高度
+        this.$nextTick(() => {
+            this.$refs.scroller.reset()
+        })
+      }
 		}
 	}
 </script>

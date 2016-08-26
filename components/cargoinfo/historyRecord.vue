@@ -5,7 +5,7 @@
   <x-header :left-options="{showBack: true}" style="background-color:#fff;"><span style="color:#000;">历史记录</span></x-header>
   -->
   <header class="mui-bar mui-bar-nav">
-    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></span>
     <h1 class="mui-title">历史记录</h1>
   </header>
   <!-- 历史记录 -->
@@ -41,7 +41,10 @@
   var dataItem;
   export default {
 		name: "historyRecord",
-		ready(){
+    ready(){
+
+    },
+		attached(){
       //执行登陆
       ajax.post("historyRecord", {
         shopId :"",
@@ -50,9 +53,8 @@
         if(status){
           if(data!=null){
             this.dataItem = data;
-            mui.toast("获取测试数据成功");
           }else{
-            mui.toast("获取测试数据失败");
+            mui.toast("获取数据失败");
           }
         }
         //this.disablevalue=false;
@@ -78,14 +80,20 @@
 					}, (status,data) => {
 						if(status){
 							if(data.length>0){
-								mui.toast("获取测试数据成功");
+
 							}else{
-								mui.toast("获取测试数据失败");
+								mui.toast("暂无历史入货信息");
 							}
 						}
 						this.disablevalue=false;
 					},false)
-			}
+			},
+      reset(){//重新计算页面高度
+        this.$nextTick(() => {
+            this.$refs.scroller.reset()
+        })
+      }
 		}
 	}
 </script>
+<style src="../../../node_modules/bootstrap/dist/css/bootstrap.css"></style>

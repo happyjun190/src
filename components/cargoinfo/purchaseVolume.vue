@@ -8,7 +8,7 @@
     </x-header>
     -->
     <header class="mui-bar mui-bar-nav mui-btn-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></span>
       <h1 class="mui-title" v-el:market>分类信息</h1>
       <span  @click="onComplete" style="color:#000; float: right;margin-top:12px;">完成</span>
     </header>
@@ -54,14 +54,19 @@
 		},
 		methods: {
       onComplete() {
-        var goodsId = this.$route.query.goodsId;
+        var tracingSourceId = this.$route.query.tracingSourceId;
         var supplierId = this.$route.query.supplierId;
         var weight = document.getElementById("weight").value;
+        if(weight=='输入进货量') {
+          mui.toast("请填写入货重量");
+          return;
+        }
+
         var weight = weight;
         //执行登陆
-        ajax.post("addtracingsource", {
+        ajax.post("updateTracingSource", {
+          tracingSourceId:tracingSourceId,
           supplierId:supplierId,
-          goodsIds:goodsId,
           weigth:weight
         }, (status,data) => {
           if(status){
@@ -77,3 +82,4 @@
 		}
 	}
 </script>
+<style src="../../../node_modules/bootstrap/dist/css/bootstrap.css"></style>

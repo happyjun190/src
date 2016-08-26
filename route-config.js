@@ -72,12 +72,6 @@ module.exports = function(router) {
 				require(['./components/cargoinfo/cargoinfo.vue'], resolve)
 			}
 		},
-		//溯源信息查询
-		'/cargoinfo4': {
-			component: function (resolve) {
-				require(['./components/cargoinfo/cargoinfo4.vue'], resolve)
-			}
-		},
 		//分类查询
 		'/classification': {
 			component: function (resolve) {
@@ -94,12 +88,6 @@ module.exports = function(router) {
 		'/stockMarket': {
 			component: function (resolve) {
 				require(['./components/cargoinfo/stockMarket.vue'], resolve)
-			}
-		},
-		//进货市场市场档口查询
-		'/selectStalls': {
-			component: function (resolve) {
-				require(['./components/cargoinfo/selectStalls.vue'], resolve)
 			}
 		},
 		//录入重量

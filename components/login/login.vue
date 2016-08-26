@@ -76,8 +76,8 @@
 			})
 		},
 		components: {
-	    Scroller
-	  },
+	       Scroller
+		},
 		data() {
 			return {
 				username: '',

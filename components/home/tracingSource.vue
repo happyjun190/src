@@ -20,7 +20,7 @@
         <article class="big_category big_category1">
           <!-- 下拉 -->
           <!-- 下拉 -->
-          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" @click="reset()">
 
             <ul class="mui-table-view" v-for="item in dataItem.tracingSourceShopDatas">
                 <li class="mui-table-view-cell mui-collapse">
@@ -72,7 +72,7 @@
   export default {
 		name: "tracingSource",
 		ready(){
-        
+
     },
     attached(){
         ajax.post("getMarketTracingSource", {
@@ -99,9 +99,11 @@
 		},
 		methods: {
       reset(){//重新计算页面高度
-        this.$nextTick(() => {
-            this.$refs.scroller.reset()
-        })
+        setTimeout(()=>{
+          this.$nextTick(() => {
+              this.$refs.scroller.reset()
+          })
+        },0)
       }
 
 		}

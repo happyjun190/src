@@ -10,9 +10,10 @@
   -->
   <div  class="page">
     <header class="mui-bar mui-bar-nav">
-      <h1 class="mui-title">食安菜妈</h1>
+      <!-- <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a> -->
+      <h1 class="mui-title">溯源信息</h1>
     </header>
-      <scroller lock-x v-ref:scroller class="full_screen" height="-100px">
+      <scroller lock-x v-ref:scroller class="content" height="-100px">
         <div class="box">
           <!-- 轮播图 -->
           <section class="banner">
@@ -37,7 +38,6 @@
               </ol>
             </div><!-- 轮播图 -->
           </section>
-
           <!-- 扫码 -->
           <section class="list">
             <ul class="row">
@@ -162,7 +162,6 @@
         this.$router.go('/saoma');
       },
       needDevelop(){
-        this.$router.go('/cargoinfo');
         mui.toast("功能开发中");
       },
       reset(){//重新计算页面高度

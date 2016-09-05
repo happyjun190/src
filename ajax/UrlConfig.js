@@ -2,7 +2,6 @@
 
 //var ip = "http://192.168.3.144:8080";
 var ip = "http://123.207.119.48:8056";
-//var ip = "http://192.168.3.154:9999";
 let base=ip+"/ShiAnCaiMa/services/"//基础地址
 const url = {
 	login:base+"aut/login",//登录

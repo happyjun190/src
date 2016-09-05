@@ -31,6 +31,7 @@ module.exports = function(router) {
 				require(['./components/login/forgot-password.vue'], resolve)
 			}
 		},
+
 		//主页
 		'/homepage': {
 			component: function (resolve) {
@@ -64,36 +65,6 @@ module.exports = function(router) {
 		'/tracingSourceSaoma': {
 			component: function (resolve) {
 				require(['./components/home/tracingSourceSaoma.vue'], resolve)
-			}
-		},
-		//溯源信息查询
-		'/cargoinfo': {
-			component: function (resolve) {
-				require(['./components/cargoinfo/cargoinfo.vue'], resolve)
-			}
-		},
-		//分类查询
-		'/classification': {
-			component: function (resolve) {
-				require(['./components/cargoinfo/classification.vue'], resolve)
-			}
-		},
-		//溯源历史记录查询
-		'/historyRecord': {
-			component: function (resolve) {
-				require(['./components/cargoinfo/historyRecord.vue'], resolve)
-			}
-		},
-		//进货市场列表查询
-		'/stockMarket': {
-			component: function (resolve) {
-				require(['./components/cargoinfo/stockMarket.vue'], resolve)
-			}
-		},
-		//录入重量
-		'/purchaseVolume': {
-			component: function (resolve) {
-				require(['./components/cargoinfo/purchaseVolume.vue'], resolve)
 			}
 		}
 

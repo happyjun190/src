@@ -1,45 +1,57 @@
 <template>
   <!--<input type='button' @click="closeCurrentPage" value='返回' />-->
   <!--<x-header :left-options="{showBack: true}" style="background-color:#04be02;">扫码</x-header>-->
-<div class="page">
+<div class="page" id="page">
   <header class="mui-bar mui-bar-nav">
     <span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></span>
     <h1 class="mui-title">扫码</h1>
   </header>
-  <div id= "bcid"></div>
+  <scroller lock-x v-ref:scroller class="content full_screen">
+    <div class="box">
+        <div id="bcid"></div>
+    </div>
+  </scroller>
 </div>
 </template>
 
 <script>
-  import {Scroller,Box,XHeader} from 'vux'
+  import {Scroller} from 'vux'
   import ajax from 'src/ajax/index.js'
   import encryption from 'src/assets/js/encryption.js'
-
-  var scan = null;
-
-
   export default {
 		name: "saoma",
     ready() {
-      // var webViewId = this.$route.query.webViewId;
-      // alert(webViewId);
+
     },
 		attached(){
-        scan = new plus.barcode.Barcode('bcid');
-        scan.onmarked = this.onmarked;
-        scan.start()
+      if(window.plus){
+        setTimeout(()=>{
+          this.scan = new plus.barcode.Barcode('bcid',[plus.barcode.QR,plus.barcode.EAN8,plus.barcode.EAN13],{frameColor:'#00FF00',scanbarColor:'#00FF00'});
+          this.scan.onmarked = this.onmarked;
+          this.scan.start()
+        },300)
+      }
 		},
-    detached(){
-      scan.close();
-    },
 		components: {
-	    Scroller,Box,XHeader
+	    Scroller
 	  },
 		data() {
 			return {
+        scan:""
 			}
 		},
+    route: {
+      deactivate(transition) {
+        this.scanclose()
+        transition.next()
+      }
+    },
 		methods: {
+      scanclose(){
+        if(window.plus){
+          this.scan.close();
+        }
+      },
       onmarked( type, result ) {
         var text = '未知: ';
         switch(type){
@@ -53,7 +65,7 @@
           text = 'EAN8: ';
           break;
         }
-        //执行登陆
+        //执行
         ajax.post("qrcScanedQuery", {
           qrcode:result
         }, (status,data) => {
@@ -73,25 +85,25 @@
                                  });
                 } else {
                   mui.toast("未检测到数据");
-                  setTimeout(function(){
-                    scan.cancel();
-                    scan.start();
+                  setTimeout(()=>{
+                    this.scan.cancel();
+                    this.scan.start();
                   },2000)
                 }
               }
-              
+
             }else{
               mui.toast("未检测到数据");
-              setTimeout(function(){
-                scan.cancel();
-                scan.start();
+              setTimeout(()=>{
+                this.scan.cancel();
+                this.scan.start();
               },2000)
             }
           } else {
             mui.toast("未检测到数据");
-            setTimeout(function(){
-              scan.cancel();
-              scan.start();
+            setTimeout(()=>{
+              this.scan.cancel();
+              this.scan.start();
             },2000)
           }
         },false)
@@ -102,13 +114,8 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-*{
-	-webkit-user-select: none;
-}
-html,body{
-	margin: 0px;
-	padding: 0px;
-	height: 100%;
+.content {
+  margin: 0 !important;
 }
 #bcid {
 	background:#000000;

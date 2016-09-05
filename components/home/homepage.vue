@@ -13,12 +13,11 @@
       <!-- <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a> -->
       <h1 class="mui-title">溯源信息</h1>
     </header>
-      <scroller lock-x v-ref:scroller class="content" height="-100px">
-        <div class="box">
+      <scroller lock-x v-ref:scroller class="content">
+        <div class="box" style="margin-top:100px !important">
           <!-- 轮播图 -->
-          <section class="banner">
+          <!-- <section class="banner">
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-              <!-- 图片 -->
               <div class="carousel-inner" role="listbox">
                 <div class="item active">
                   <img src="../../assets/images/banner_1.jpg" alt="">
@@ -30,14 +29,13 @@
                   <img src="../../assets/images/banner_1.jpg" alt="">
                 </div>
               </div>
-              <!-- 指标-->
               <ol class="carousel-indicators">
                 <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                 <li data-target="#carousel-example-generic" data-slide-to="1"></li>
                 <li data-target="#carousel-example-generic" data-slide-to="2"></li>
               </ol>
-            </div><!-- 轮播图 -->
-          </section>
+            </div>
+          </section> -->
           <!-- 扫码 -->
           <section class="list">
             <ul class="row">
@@ -99,12 +97,12 @@
               </div>
             </article>
           </section>
-          <div class="wrie"></div>
+          <!-- <div class="wrie"></div> -->
         </div>
       </scroller>
 
       <!-- 脚部-->
-      <section class="footer">
+      <!-- <section class="footer">
         <footer class="list_1">
           <ul class="row">
           <li class="col-sm-4 col-xs-4 text-center">
@@ -127,7 +125,7 @@
             </span>
           </li>
         </ul>
-        </footer>
+        </footer> -->
       </section>
 
   </div>

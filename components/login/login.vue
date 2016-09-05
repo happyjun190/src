@@ -95,7 +95,7 @@
 					ajax.post("login", {
 						name: this.username,
 						pwd: encryption(this.password),
-						// type:"com.firefly.pojo.data.Shop"
+						//type:"com.firefly.pojo.data.Shop"
 						type:"com.firefly.pojo.data.Member"
 					}, (status,data) => {
 						if(status){
